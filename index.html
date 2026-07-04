@@ -8,7 +8,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23E2001A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"></noscript>
 <style>
 :root{
   --rot:#E2001A;
@@ -292,22 +294,31 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 .quad-label.br{bottom:8px;right:10px}
 .dot{
   position:absolute;
-  width:13px;height:13px;
+  width:25px;height:25px;
   transform:translate(-50%,50%);
+  background:transparent;
+  border:none;
+  padding:0;
+  cursor:pointer;
+}
+.dot::before{
+  content:"";
+  position:absolute;
+  inset:6px;
   background:var(--grau);
   border:2px solid #fff;
   outline:1px solid var(--linie);
-  cursor:pointer;
 }
-.dot.prod{background:var(--gruen)}
-.dot.pilot{background:var(--amber)}
-.dot.konzept{background:#9B9DA0}
-.dot.stop{background:var(--dunkelrot)}
-.dot:hover,.dot:focus-visible{outline:2px solid var(--ink);z-index:5}
+.dot.prod::before{background:var(--gruen)}
+.dot.pilot::before{background:var(--amber)}
+.dot.konzept::before{background:#9B9DA0}
+.dot.stop::before{background:var(--dunkelrot)}
+.dot:hover::before,.dot:focus-visible::before{outline:2px solid var(--ink)}
+.dot:hover,.dot:focus-visible{z-index:5}
 .dot .tip{
   display:none;
   position:absolute;
-  bottom:20px;
+  bottom:26px;
   left:50%;
   transform:translateX(-50%);
   background:var(--ink);
@@ -322,7 +333,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 .dot .tip b{display:block;font-family:var(--font-display);font-size:.72rem}
 .dot .tip .tip-num{font-family:var(--font-mono);color:#F5B3BB}
 .dot:hover .tip,.dot:focus-visible .tip{display:block}
-.dot.tip-unten .tip{bottom:auto;top:20px}
+.dot.tip-unten .tip{bottom:auto;top:26px}
 .dot.tip-links .tip{left:auto;right:-10px;transform:none}
 .dot.tip-rechts .tip{left:-10px;transform:none}
 .achse{
@@ -570,7 +581,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 .demo-note b{color:var(--ink)}
 
 /* ---------- Feature A: Presenter-Mode ---------- */
-.p-hint{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.625rem;color:#9B9DA0}
+.p-hint{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.625rem;color:var(--grau)}
 body.presenter .sidebar{display:none}
 body.presenter .demo-note{display:none}
 body.presenter .main{max-width:1600px;margin:0 auto;width:100%}
