@@ -14,6 +14,7 @@
 <style>
 :root{
   --rot:#E2001A;
+  --gelb:#FFD500;
   --dunkelrot:#B00014;
   --ink:#1D1D1B;
   --grau:#63666A;
@@ -53,21 +54,34 @@ body{
 .logo-block{
   padding:24px 20px 20px;
   border-bottom:1px solid var(--linie);
-  display:flex;
-  align-items:center;
-  gap:12px;
 }
-.logo-mark{
+.logo-lockup{display:flex;align-items:stretch}
+.logo-cws{
   background:var(--rot);
-  color:#fff;
+  color:var(--ink);
   font-family:var(--font-display);
   font-weight:700;
-  font-size:1.1rem;
-  letter-spacing:.06em;
-  padding:8px 10px;
+  font-size:1.05rem;
+  letter-spacing:.08em;
+  padding:9px 12px;
   line-height:1;
+  display:flex;
+  align-items:center;
+}
+.logo-ww{
+  background:var(--gelb);
+  color:var(--ink);
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:.62rem;
+  letter-spacing:.22em;
+  padding:9px 12px;
+  line-height:1;
+  display:flex;
+  align-items:center;
 }
 .logo-text{
+  margin-top:10px;
   font-family:var(--font-display);
   font-weight:600;
   font-size:.8rem;
@@ -170,7 +184,8 @@ body{
 .view-title{
   font-family:var(--font-display);
   font-weight:700;
-  font-size:1.35rem;
+  font-size:1.5rem;
+  letter-spacing:-.01em;
   margin-bottom:4px;
 }
 .view-sub{color:var(--grau);font-size:.8125rem;margin-bottom:20px;max-width:75em}
@@ -682,7 +697,10 @@ tr.uc-detail.gefiltert{display:none}
 
 <aside class="sidebar">
   <div class="logo-block">
-    <div class="logo-mark">CWS</div>
+    <div class="logo-lockup">
+      <div class="logo-cws">CWS</div>
+      <div class="logo-ww">WORKWEAR</div>
+    </div>
     <div class="logo-text">AI Cockpit<span>Center of Excellence</span></div>
   </div>
   <nav class="nav" aria-label="Hauptnavigation">

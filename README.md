@@ -41,8 +41,9 @@ Fallback sans-serif — funktioniert offline).
 | 04 Integration | AI-Lösungen mit Fachbereichen und IT in CRM/ERP/Datenplattformen integrieren |
 | 05 Governance & Enablement | EU AI Act, Compliance, Qualität; Trainings, Wissenstransfer, Change |
 
-CWS-CI: Rot `#E2001A` als einzige Akzentfarbe, Archivo/Inter/IBM Plex Mono,
-kantige Flächen. Alle Kennzahlen und Use Cases sind **illustrative Annahmen**,
+CWS-CI: Rot `#E2001A` als einzige Akzent-/Funktionsfarbe, CWS-Gelb `#FFD500`
+ausschließlich im Logo-Lockup (CWS · WORKWEAR wie im Web-Auftritt),
+Archivo/Inter/IBM Plex Mono, kantige Flächen. Alle Kennzahlen und Use Cases sind **illustrative Annahmen**,
 keine realen CWS-Daten (Hinweisblock im Footer).
 
 ## Qualitätssicherung
@@ -62,3 +63,4 @@ Automatisiert per Playwright vor jedem Deploy:
 | 1 | Grundstruktur: Sidebar, KPI-Leiste, 5 Views (Portfolio-Tabelle + Matrix, Stage-Gate-Kanban, Roadmap/Team, Systemlandschaft, Governance/Enablement) |
 | 2 | Features A–F: Presenter-Mode (P), BPM-Prozess-Baselines, Filter-Chips, Tasten 1–5, KPI-Count-up (800 ms, respektiert `prefers-reduced-motion`), Druck-Stylesheet A4 quer |
 | 3 | Feinschliff: Fonts nicht-blockierend, 25px-Touchtargets Matrix, Kontrast-Fix — Lighthouse 100/100/96 |
+| 4 | Corporate Design nachgeschärft: Logo-Lockup Rot+Gelb wie cws.com, Headlines fetter — bewusst ohne runde Buttons (Cockpit ≠ Marketing-Site) |
