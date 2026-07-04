@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CWS AI Cockpit — Konzept-Prototyp</title>
+<meta name="description" content="Konzept-Prototyp: Steuerung eines AI Center of Excellence bei CWS Workwear. Ricardo Serrano, Bewerbung Teamlead AI (JR1013216).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23E2001A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rot:#E2001A;
+  --dunkelrot:#B00014;
+  --ink:#1D1D1B;
+  --grau:#63666A;
+  --linie:#E6E7E8;
+  --bg:#F4F5F6;
+  --panel:#FFFFFF;
+  --gruen:#1E7D3B;
+  --amber:#B25E00;
+  --font-display:"Archivo",Arial,sans-serif;
+  --font-body:"Inter",Arial,sans-serif;
+  --font-mono:"IBM Plex Mono","Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0}
+html{font-size:16px}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  min-height:100vh;
+  font-size:.875rem;
+  line-height:1.5;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar{
+  width:248px;
+  min-width:248px;
+  background:var(--panel);
+  border-right:1px solid var(--linie);
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.logo-block{
+  padding:24px 20px 20px;
+  border-bottom:1px solid var(--linie);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-mark{
+  background:var(--rot);
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:1.1rem;
+  letter-spacing:.06em;
+  padding:8px 10px;
+  line-height:1;
+}
+.logo-text{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:.8rem;
+  line-height:1.3;
+}
+.logo-text span{
+  display:block;
+  font-family:var(--font-body);
+  font-weight:400;
+  color:var(--grau);
+  font-size:.7rem;
+}
+.nav{flex:1;padding:16px 0}
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  padding:11px 20px;
+  background:none;
+  border:none;
+  border-left:3px solid transparent;
+  font-family:var(--font-body);
+  font-size:.8125rem;
+  font-weight:500;
+  color:var(--grau);
+  text-align:left;
+  cursor:pointer;
+}
+.nav-item:hover{background:var(--bg);color:var(--ink)}
+.nav-item.active{
+  border-left-color:var(--rot);
+  color:var(--ink);
+  background:var(--bg);
+  font-weight:600;
+}
+.nav-num{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--grau);
+}
+.nav-item.active .nav-num{color:var(--rot);font-weight:600}
+.sidebar-footer{
+  padding:16px 20px;
+  border-top:1px solid var(--linie);
+  font-size:.675rem;
+  color:var(--grau);
+  line-height:1.6;
+}
+
+/* ---------- Hauptbereich ---------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.kpibar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--linie);
+  border-bottom:1px solid var(--linie);
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.kpi{
+  background:var(--panel);
+  padding:14px 24px;
+}
+.kpi-value{
+  font-family:var(--font-mono);
+  font-weight:600;
+  font-size:1.35rem;
+  color:var(--ink);
+  line-height:1.2;
+}
+.kpi-value b{color:var(--rot);font-weight:600}
+.kpi-label{font-size:.7rem;color:var(--grau);margin-top:2px}
+
+.content{flex:1;padding:28px 32px 12px}
+.view{display:none}
+.view.active{display:block}
+
+/* Zitatblock Stellenprofil */
+.zitat{
+  background:var(--panel);
+  border:1px solid var(--linie);
+  border-left:4px solid var(--rot);
+  padding:14px 20px;
+  margin-bottom:24px;
+}
+.zitat-label{
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--rot);
+  margin-bottom:4px;
+}
+.zitat p{font-style:italic;color:var(--ink);font-size:.875rem;max-width:70em}
+
+.view-title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:1.35rem;
+  margin-bottom:4px;
+}
+.view-sub{color:var(--grau);font-size:.8125rem;margin-bottom:20px;max-width:75em}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--linie);
+  padding:20px;
+  margin-bottom:24px;
+}
+.panel-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:.95rem;
+  margin-bottom:4px;
+}
+.panel-sub{font-size:.75rem;color:var(--grau);margin-bottom:16px}
+
+/* ---------- Status-Chips ---------- */
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:3px 8px;
+  border:1px solid var(--linie);
+  white-space:nowrap;
+}
+.chip::before{content:"";width:7px;height:7px;background:var(--grau)}
+.chip.prod{color:var(--gruen);border-color:#BFDCC8}
+.chip.prod::before{background:var(--gruen)}
+.chip.pilot{color:var(--amber);border-color:#E3CBA8}
+.chip.pilot::before{background:var(--amber)}
+.chip.konzept{color:var(--grau);border-color:var(--linie)}
+.chip.konzept::before{background:var(--grau)}
+.chip.stop{color:var(--dunkelrot);border-color:#EBB8BE}
+.chip.stop::before{background:var(--dunkelrot)}
+.chip.neutral{color:var(--grau)}
+.chip.neutral::before{background:#C9CBCE}
+
+/* ---------- Tab 01: Portfolio-Tabelle ---------- */
+.grid-2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:start}
+.tabelle-scroll{overflow-x:auto}
+table.uc{width:100%;min-width:540px;border-collapse:collapse;font-size:.8125rem}
+table.uc th{
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--grau);
+  text-align:left;
+  padding:8px 10px;
+  border-bottom:2px solid var(--ink);
+  white-space:nowrap;
+}
+table.uc td{
+  padding:10px 8px;
+  border-bottom:1px solid var(--linie);
+  vertical-align:middle;
+}
+tr.uc-row{cursor:pointer}
+tr.uc-row:hover td{background:var(--bg)}
+tr.uc-row.open td{background:var(--bg)}
+.uc-id{font-family:var(--font-mono);font-size:.75rem;color:var(--grau);white-space:nowrap}
+.uc-id .caret{margin-right:2px}
+.uc-name{font-weight:600}
+.uc-name small{display:block;font-weight:400;color:var(--grau);font-size:.7rem}
+.wert{display:flex;align-items:center;gap:8px;min-width:118px}
+.wert-balken{height:10px;background:var(--rot);min-width:2px}
+.wert-balken.gestoppt{background:#C9CBCE}
+.wert-num{font-family:var(--font-mono);font-size:.72rem;white-space:nowrap}
+.aiakt{font-family:var(--font-mono);font-size:.7rem;color:var(--grau);max-width:96px}
+.aiakt.hoch{color:var(--dunkelrot);font-weight:600}
+.caret{color:var(--grau);font-size:.7rem;transition:none}
+tr.uc-row.open .caret{color:var(--rot)}
+tr.uc-detail{display:none}
+tr.uc-detail.open{display:table-row}
+tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid var(--linie)}
+.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.detail-block h4{
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--rot);
+  margin-bottom:4px;
+}
+.detail-block p{font-size:.75rem;color:var(--ink)}
+.detail-block p.mono{font-family:var(--font-mono);font-size:.7rem;color:var(--grau)}
+
+/* ---------- Tab 01: Matrix ---------- */
+.matrix-wrap{position:relative}
+.matrix{
+  position:relative;
+  width:100%;
+  aspect-ratio:1.05/1;
+  border:1px solid var(--linie);
+  background:
+    linear-gradient(to right,transparent calc(50% - .5px),var(--linie) calc(50% - .5px),var(--linie) calc(50% + .5px),transparent calc(50% + .5px)),
+    linear-gradient(to bottom,transparent calc(50% - .5px),var(--linie) calc(50% - .5px),var(--linie) calc(50% + .5px),transparent calc(50% + .5px));
+}
+.quad-label{
+  position:absolute;
+  font-family:var(--font-display);
+  font-size:.625rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:#B9BBBE;
+  pointer-events:none;
+}
+.quad-label.tl{top:8px;left:10px}
+.quad-label.tr{top:8px;right:10px}
+.quad-label.bl{bottom:8px;left:10px}
+.quad-label.br{bottom:8px;right:10px}
+.dot{
+  position:absolute;
+  width:13px;height:13px;
+  transform:translate(-50%,50%);
+  background:var(--grau);
+  border:2px solid #fff;
+  outline:1px solid var(--linie);
+  cursor:pointer;
+}
+.dot.prod{background:var(--gruen)}
+.dot.pilot{background:var(--amber)}
+.dot.konzept{background:#9B9DA0}
+.dot.stop{background:var(--dunkelrot)}
+.dot:hover,.dot:focus-visible{outline:2px solid var(--ink);z-index:5}
+.dot .tip{
+  display:none;
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:8px 10px;
+  width:200px;
+  font-size:.7rem;
+  line-height:1.45;
+  z-index:10;
+  pointer-events:none;
+}
+.dot .tip b{display:block;font-family:var(--font-display);font-size:.72rem}
+.dot .tip .tip-num{font-family:var(--font-mono);color:#F5B3BB}
+.dot:hover .tip,.dot:focus-visible .tip{display:block}
+.dot.tip-unten .tip{bottom:auto;top:20px}
+.dot.tip-links .tip{left:auto;right:-10px;transform:none}
+.dot.tip-rechts .tip{left:-10px;transform:none}
+.achse{
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--font-display);
+  font-size:.625rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--grau);
+  margin-top:8px;
+}
+.matrix-legende{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:.7rem;color:var(--grau)}
+.matrix-legende span{display:inline-flex;align-items:center;gap:6px}
+.matrix-legende i{width:9px;height:9px;display:inline-block}
+.matrix-legende .lg-prod{background:var(--gruen)}
+.matrix-legende .lg-pilot{background:var(--amber)}
+.matrix-legende .lg-konzept{background:#9B9DA0}
+.matrix-legende .lg-stop{background:var(--dunkelrot)}
+
+/* ---------- Tab 02: Kanban ---------- */
+.kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:stretch}
+.spalte{
+  background:var(--panel);
+  border:1px solid var(--linie);
+  border-top:3px solid var(--grau);
+  display:flex;
+  flex-direction:column;
+}
+.spalte.s-pilot{border-top-color:var(--amber)}
+.spalte.s-prod{border-top-color:var(--gruen)}
+.spalte-kopf{
+  padding:12px 14px 10px;
+  border-bottom:1px solid var(--linie);
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.spalte-kopf h3{font-family:var(--font-display);font-size:.8rem;font-weight:600}
+.spalte-kopf .anzahl{font-family:var(--font-mono);font-size:.7rem;color:var(--grau)}
+.spalte-body{padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.karte{
+  background:#fff;
+  border:1px solid var(--linie);
+  border-left:3px solid var(--grau);
+  padding:10px 12px;
+}
+.karte.k-idee{border-left-color:#C9CBCE}
+.karte.k-konzept{border-left-color:var(--grau)}
+.karte.k-pilot{border-left-color:var(--amber)}
+.karte.k-prod{border-left-color:var(--gruen)}
+.karte.k-stop{border-left-color:var(--dunkelrot);background:#FBF1F2}
+.karte h4{font-size:.75rem;font-weight:600;line-height:1.35}
+.karte .k-id{font-family:var(--font-mono);font-size:.65rem;color:var(--grau)}
+.karte p{font-size:.7rem;color:var(--grau);margin-top:4px}
+.karte .k-stopchip{margin-top:6px}
+.gate{
+  border-top:1px solid var(--linie);
+  background:var(--bg);
+  padding:10px 14px;
+  font-size:.675rem;
+  color:var(--grau);
+  line-height:1.55;
+}
+.gate b{
+  display:block;
+  font-family:var(--font-display);
+  font-size:.625rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--ink);
+  margin-bottom:3px;
+}
+
+/* ---------- Tab 03: Roadmap & Team ---------- */
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.quartal{
+  background:var(--panel);
+  border:1px solid var(--linie);
+  border-top:3px solid var(--linie);
+  padding:16px;
+}
+.quartal.done{border-top-color:var(--gruen)}
+.quartal.aktuell{border-top-color:var(--rot)}
+.quartal-kopf{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.quartal-kopf h3{font-family:var(--font-display);font-size:.9rem;font-weight:700}
+.q-tag{font-family:var(--font-mono);font-size:.65rem;color:var(--grau)}
+.q-tag.done{color:var(--gruen)}
+.q-tag.aktuell{color:var(--rot);font-weight:600}
+.quartal .q-thema{font-size:.75rem;font-weight:600;color:var(--grau);margin-bottom:10px}
+.quartal ul{list-style:none}
+.quartal li{
+  font-size:.72rem;
+  color:var(--ink);
+  padding:4px 0 4px 14px;
+  position:relative;
+  border-bottom:1px solid var(--bg);
+}
+.quartal li::before{
+  content:"";
+  position:absolute;
+  left:0;top:9px;
+  width:6px;height:6px;
+  background:var(--rot);
+}
+.quartal.done li::before{background:var(--gruen)}
+.prinzip{
+  background:var(--ink);
+  color:#fff;
+  padding:16px 20px;
+  margin-bottom:24px;
+  display:flex;
+  gap:14px;
+  align-items:baseline;
+}
+.prinzip .p-label{
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--rot);
+  white-space:nowrap;
+}
+.prinzip p{font-size:.875rem;font-weight:500}
+.team-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:start}
+.rolle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--linie);
+}
+.rolle:last-child{border-bottom:none}
+.rolle-name{font-size:.8125rem;font-weight:600}
+.rolle-name small{display:block;font-weight:400;color:var(--grau);font-size:.7rem}
+.fuehrung{
+  border-left:4px solid var(--rot);
+  background:var(--bg);
+  padding:12px 16px;
+  font-style:italic;
+  font-size:.8125rem;
+  margin-top:16px;
+}
+
+/* ---------- Tab 04: Integration ---------- */
+.systeme{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.system{
+  background:var(--panel);
+  border:1px solid var(--linie);
+  padding:16px;
+}
+.system-kopf{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+.system-kopf h3{font-family:var(--font-display);font-size:.875rem;font-weight:600}
+.system p{font-size:.72rem;color:var(--grau)}
+.system .s-nutzer{
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  color:var(--grau);
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid var(--bg);
+}
+.leitplanken{list-style:none}
+.leitplanken li{
+  padding:12px 0 12px 20px;
+  border-bottom:1px solid var(--linie);
+  position:relative;
+  font-size:.8125rem;
+  color:var(--grau);
+}
+.leitplanken li:last-child{border-bottom:none}
+.leitplanken li::before{
+  content:"";
+  position:absolute;
+  left:0;top:19px;
+  width:8px;height:8px;
+  background:var(--rot);
+}
+.leitplanken b{color:var(--ink);font-weight:600}
+
+/* ---------- Tab 05: Governance ---------- */
+.gov-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.risiko-zeile{display:grid;grid-template-columns:110px 1fr 40px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--bg)}
+.risiko-zeile:last-child{border-bottom:none}
+.risiko-name{font-size:.75rem;font-weight:600}
+.risiko-name small{display:block;font-weight:400;color:var(--grau);font-size:.65rem}
+.risiko-balken{height:14px;background:var(--bg);position:relative}
+.risiko-balken i{position:absolute;inset:0 auto 0 0;display:block}
+.risiko-balken .rb-min{background:var(--gruen)}
+.risiko-balken .rb-beg{background:var(--amber)}
+.risiko-balken .rb-hoch{background:var(--dunkelrot)}
+.risiko-anzahl{font-family:var(--font-mono);font-size:.8rem;font-weight:600;text-align:right}
+.check-liste{list-style:none}
+.check-liste li{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  padding:10px 0;
+  border-bottom:1px solid var(--bg);
+  font-size:.78rem;
+}
+.check-liste li:last-child{border-bottom:none}
+.check-status{font-family:var(--font-mono);font-size:.65rem;white-space:nowrap;color:var(--gruen);font-weight:600}
+.check-status.offen{color:var(--amber)}
+.check-liste b{font-weight:600}
+.check-liste small{display:block;color:var(--grau);font-size:.7rem}
+.fortschritt{margin-bottom:14px}
+.fortschritt-kopf{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:5px}
+.fortschritt-kopf b{font-weight:600}
+.fortschritt-kopf span{font-family:var(--font-mono);font-size:.7rem;color:var(--grau)}
+.fortschritt-balken{height:10px;background:var(--bg)}
+.fortschritt-balken i{display:block;height:100%;background:var(--rot)}
+.format-liste{list-style:none;margin-top:6px}
+.format-liste li{
+  padding:8px 0 8px 18px;
+  border-bottom:1px solid var(--bg);
+  position:relative;
+  font-size:.75rem;
+  color:var(--grau);
+}
+.format-liste li::before{
+  content:"";
+  position:absolute;
+  left:0;top:14px;
+  width:6px;height:6px;
+  background:var(--rot);
+}
+.format-liste li:last-child{border-bottom:none}
+.format-liste b{color:var(--ink);font-weight:600}
+
+/* ---------- Demo-Hinweis ---------- */
+.demo-note{
+  margin:8px 32px 28px;
+  border:1px dashed #C9CBCE;
+  background:var(--panel);
+  padding:12px 16px;
+  font-size:.7rem;
+  color:var(--grau);
+  line-height:1.6;
+}
+.demo-note b{color:var(--ink)}
+
+/* ---------- Responsiv ---------- */
+@media (max-width:1400px){
+  .kanban{grid-template-columns:repeat(5,1fr);gap:10px}
+  .content{padding:24px 24px 8px}
+  .demo-note{margin:8px 24px 24px}
+}
+@media (max-width:1320px){
+  table.uc{font-size:.78rem}
+  table.uc th,table.uc td{padding:8px 6px}
+  .chip{font-size:.6rem;padding:2px 6px;letter-spacing:.05em}
+  .wert{min-width:104px;gap:6px}
+  .uc-name small{font-size:.65rem}
+}
+@media (max-width:1200px){
+  .grid-2,.team-grid,.gov-grid{grid-template-columns:minmax(0,1fr)}
+  .roadmap{grid-template-columns:repeat(2,1fr)}
+  .kanban{grid-template-columns:repeat(3,1fr)}
+  .systeme{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .sidebar{width:200px;min-width:200px}
+  .kpibar{grid-template-columns:repeat(2,1fr)}
+  .kanban{grid-template-columns:repeat(2,1fr)}
+  .detail-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="logo-block">
+    <div class="logo-mark">CWS</div>
+    <div class="logo-text">AI Cockpit<span>Center of Excellence</span></div>
+  </div>
+  <nav class="nav" aria-label="Hauptnavigation">
+    <button class="nav-item active" data-view="v1"><span class="nav-num">01</span>Strategie &amp; Portfolio</button>
+    <button class="nav-item" data-view="v2"><span class="nav-num">02</span>AI-Lifecycle</button>
+    <button class="nav-item" data-view="v3"><span class="nav-num">03</span>Roadmap &amp; Team</button>
+    <button class="nav-item" data-view="v4"><span class="nav-num">04</span>Integration</button>
+    <button class="nav-item" data-view="v5"><span class="nav-num">05</span>Governance &amp; Enablement</button>
+  </nav>
+  <div class="sidebar-footer">
+    Konzept-Prototyp<br>
+    Ricardo Serrano · Juli 2026<br>
+    Teamlead AI · JR1013216
+  </div>
+</aside>
+
+<main class="main">
+
+  <header class="kpibar">
+    <div class="kpi">
+      <div class="kpi-value">14</div>
+      <div class="kpi-label">Use Cases im Portfolio</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">1.240 h</div>
+      <div class="kpi-label">Prozessstunden gespart / Monat</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">2,4 Mio €</div>
+      <div class="kpi-label">Wertbeitrag-Pipeline p. a.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">100 %</div>
+      <div class="kpi-label">EU-AI-Act-Konformität</div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ============ TAB 01: STRATEGIE & PORTFOLIO ============ -->
+    <section id="v1" class="view active">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„AI-Use-Cases identifizierst, bewertest und priorisierst du nach Business-Mehrwert und erwartetem Return on Investment.“</p>
+      </div>
+      <h1 class="view-title">Strategie &amp; Portfolio</h1>
+      <p class="view-sub">Ein Portfolio statt Einzelprojekte: jeder Use Case mit quantifiziertem Wertbeitrag, AI-Act-Klassifizierung und klarer Priorisierung. Zeile anklicken für Ziel, Ansatz und Stack.</p>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-title">Use-Case-Portfolio</div>
+          <div class="panel-sub">Top 7 von 14 nach Wertbeitrag · illustrative Daten</div>
+          <div class="tabelle-scroll">
+          <table class="uc">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Use Case</th>
+                <th>Status</th>
+                <th>AI-Act</th>
+                <th>Wertbeitrag p. a.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="uc-row" data-status="pilot" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-01</td>
+                <td class="uc-name">Tourenoptimierung Servicefahrzeuge<small>−11 % Fahrzeit im Pilot</small></td>
+                <td><span class="chip pilot">Pilot</span></td>
+                <td class="aiakt">minimal</td>
+                <td><div class="wert"><div class="wert-balken" style="width:84px"></div><span class="wert-num">680 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Fahrzeit und Kilometer je Servicetour senken, Termintreue der Servicefenster erhöhen — bei gleicher Stopp-Anzahl.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>Tägliche Tourenplanung per Optimierungs-Solver (Vehicle Routing), Fahrzeitprognose aus Telematik-Historie. Disponenten behalten die letzte Entscheidung.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">Python · OR-Tools · Telematik-Schnittstelle · Dispositions-Dashboard</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="prod" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-02</td>
+                <td class="uc-name">Bedarfsprognose Textilbestand<small>live in 11 Wäschereien</small></td>
+                <td><span class="chip prod">Produktion</span></td>
+                <td class="aiakt">minimal</td>
+                <td><div class="wert"><div class="wert-balken" style="width:67px"></div><span class="wert-num">540 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Überbestände und Fehlmengen im Miettextil-Pool reduzieren — weniger gebundenes Kapital, höhere Lieferfähigkeit.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>Zeitreihenprognose je Artikel und Standort, nächtliches Batch-Scoring, Vorschlagswerte direkt in der Bestandsdisposition. Ausgerollt auf 11 Wäschereien.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">Python · Gradient Boosting · Data Warehouse · Dispositions-Integration</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="prod" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-03</td>
+                <td class="uc-name">E-Mail-Triage Kundenservice<small>−38 % Ø Bearbeitungszeit</small></td>
+                <td><span class="chip prod">Produktion</span></td>
+                <td class="aiakt">begrenzt · Art. 50</td>
+                <td><div class="wert"><div class="wert-balken" style="width:51px"></div><span class="wert-num">410 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Eingehende Service-Mails automatisch klassifizieren, priorisieren und mit Antwortentwurf vorbelegen.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>LLM-Klassifikation plus Entwurfsgenerierung; jede Antwort wird von Mitarbeitenden freigegeben (Human-in-the-Loop). Transparenzpflicht nach Art. 50 umgesetzt.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">EU-gehostetes LLM · API-Gateway · Ticketsystem-Integration</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="pilot" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-04</td>
+                <td class="uc-name">Churn-Frühwarnung Mietverträge<small>Pilot Region Süd</small></td>
+                <td><span class="chip pilot">Pilot</span></td>
+                <td class="aiakt">minimal</td>
+                <td><div class="wert"><div class="wert-balken" style="width:48px"></div><span class="wert-num">390 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Kündigungsrisiken bei Mietverträgen sechs Monate vor Vertragsende erkennen, damit der Vertrieb gezielt gegensteuern kann.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>Klassifikationsmodell auf Vertrags-, Service- und Reklamationsdaten; wöchentliche Risikoliste mit Begründung je Fall direkt im CRM.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">Python · scikit-learn · SHAP-Erklärbarkeit · CRM-Integration</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="konzept" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-05</td>
+                <td class="uc-name">RAG-Wissensassistent Servicetechniker<small>DSFA in Arbeit</small></td>
+                <td><span class="chip konzept">Konzeption</span></td>
+                <td class="aiakt">begrenzt</td>
+                <td><div class="wert"><div class="wert-balken" style="width:38px"></div><span class="wert-num">310 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Technische Dokumentation und Störungshistorie für Servicetechniker im Feld per Frage-Antwort verfügbar machen.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>Retrieval-Augmented Generation über Wartungshandbücher und Serviceberichte; jede Antwort mit Quellenangabe, keine freie Generierung ohne Beleg.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">Vektorsuche · EU-gehostetes LLM · Anbindung mobile Service-App</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="prod" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-06</td>
+                <td class="uc-name">Beleg- &amp; Lieferscheinprüfung<small>72 % Dunkelverarbeitung</small></td>
+                <td><span class="chip prod">Produktion</span></td>
+                <td class="aiakt">minimal</td>
+                <td><div class="wert"><div class="wert-balken" style="width:35px"></div><span class="wert-num">280 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Ziel</h4><p>Lieferscheine und Belege automatisch erfassen, gegen Bestell- und Vertragsdaten prüfen und verbuchen.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>OCR plus Prüfregeln und ML-Abgleich; 72 % laufen ohne manuellen Eingriff durch, nur Abweichungen gehen an die Sachbearbeitung. Audit-Trail GoBD-konform.</p></div>
+                    <div class="detail-block"><h4>Stack</h4><p class="mono">OCR-Service · Workflow-Engine · ERP-Schnittstelle · Audit-Log</p></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="uc-row" data-status="stop" tabindex="0">
+                <td class="uc-id"><span class="caret">▸</span> UC-08</td>
+                <td class="uc-name">CV-Vorauswahl Recruiting<small>Beschluss dokumentiert</small></td>
+                <td><span class="chip stop">Zurückgestellt</span></td>
+                <td class="aiakt hoch">hoch · Anhang III</td>
+                <td><div class="wert"><div class="wert-balken gestoppt" style="width:15px"></div><span class="wert-num">120 T€</span></div></td>
+              </tr>
+              <tr class="uc-detail">
+                <td colspan="5">
+                  <div class="detail-grid">
+                    <div class="detail-block"><h4>Entscheidung</h4><p><b>Priorisierung heißt auch Nein sagen.</b> Automatisierte Bewerbungsvorauswahl ist ein Hochrisiko-System nach Anhang III EU AI Act (Beschäftigung).</p></div>
+                    <div class="detail-block"><h4>Begründung</h4><p>Konformitätsbewertung, Grundrechte-Folgenabschätzung und laufende Aufsicht stehen in keinem Verhältnis zum erwarteten Nutzen von 120 T€.</p></div>
+                    <div class="detail-block"><h4>Konsequenz</h4><p>Zurückgestellt mit dokumentierter Begründung; Wiedervorlage, sobald harmonisierte Normen die Konformitätskosten deutlich senken.</p></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Priorisierungs-Matrix</div>
+          <div class="panel-sub">Wertbeitrag × Umsetzungsaufwand · Punkt berühren für Details</div>
+          <div class="matrix-wrap">
+            <div class="matrix">
+              <span class="quad-label tl">Quick Wins</span>
+              <span class="quad-label tr">Strategisch</span>
+              <span class="quad-label bl">Füller</span>
+              <span class="quad-label br">Beobachten</span>
+              <button class="dot pilot" style="left:66%;bottom:88%" aria-label="UC-01 Tourenoptimierung">
+                <span class="tip"><b>UC-01 Tourenoptimierung</b>Pilot · <span class="tip-num">680 T€ p. a.</span><br>Hoher Wert, hoher Integrationsaufwand — strategisches Leitprojekt.</span>
+              </button>
+              <button class="dot prod" style="left:55%;bottom:76%" aria-label="UC-02 Bedarfsprognose">
+                <span class="tip"><b>UC-02 Bedarfsprognose</b>Produktion · <span class="tip-num">540 T€ p. a.</span><br>Skaliert über 11 Wäschereien, Datenbasis vorhanden.</span>
+              </button>
+              <button class="dot prod" style="left:30%;bottom:62%" aria-label="UC-03 E-Mail-Triage">
+                <span class="tip"><b>UC-03 E-Mail-Triage</b>Produktion · <span class="tip-num">410 T€ p. a.</span><br>Quick Win: klarer Prozess, schnelle Amortisation.</span>
+              </button>
+              <button class="dot pilot" style="left:45%;bottom:56%" aria-label="UC-04 Churn-Frühwarnung">
+                <span class="tip"><b>UC-04 Churn-Frühwarnung</b>Pilot · <span class="tip-num">390 T€ p. a.</span><br>Wert hängt an CRM-Datenqualität — deshalb Pilot vor Rollout.</span>
+              </button>
+              <button class="dot konzept tip-unten" style="left:58%;bottom:44%" aria-label="UC-05 RAG-Wissensassistent">
+                <span class="tip"><b>UC-05 RAG-Wissensassistent</b>Konzeption · <span class="tip-num">310 T€ p. a.</span><br>Nutzen plausibel, Aufwand für Doku-Aufbereitung real — Gate 3 offen.</span>
+              </button>
+              <button class="dot prod tip-unten" style="left:24%;bottom:40%" aria-label="UC-06 Belegprüfung">
+                <span class="tip"><b>UC-06 Beleg-/Lieferscheinprüfung</b>Produktion · <span class="tip-num">280 T€ p. a.</span><br>Füller mit solider Rendite — läuft stabil im Betrieb.</span>
+              </button>
+              <button class="dot stop tip-unten tip-links" style="left:82%;bottom:26%" aria-label="UC-08 CV-Vorauswahl, zurückgestellt">
+                <span class="tip"><b>UC-08 CV-Vorauswahl</b>Zurückgestellt · <span class="tip-num">Hochrisiko Anhang III</span><br>Compliance-Aufwand übersteigt Nutzen — bewusst gestoppt.</span>
+              </button>
+            </div>
+            <div class="achse"><span>← geringer Aufwand</span><span>Wertbeitrag ↑</span><span>hoher Aufwand →</span></div>
+            <div class="matrix-legende">
+              <span><i class="lg-prod"></i>Produktion</span>
+              <span><i class="lg-pilot"></i>Pilot</span>
+              <span><i class="lg-konzept"></i>Konzeption</span>
+              <span><i class="lg-stop"></i>Zurückgestellt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 02: AI-LIFECYCLE ============ -->
+    <section id="v2" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„Du verantwortest den gesamten AI-Lifecycle — von der Idee über Konzeption und Entwicklung bis zum produktiven Einsatz.“</p>
+      </div>
+      <h1 class="view-title">AI-Lifecycle: Stage-Gate-Steuerung</h1>
+      <p class="view-sub">Jeder Use Case durchläuft fünf Stufen mit harten Gate-Kriterien. Was ein Gate nicht besteht, wird nicht weitergezogen — so bleibt die Pipeline ehrlich.</p>
+
+      <div class="kanban">
+        <div class="spalte">
+          <div class="spalte-kopf"><h3>Idee</h3><span class="anzahl">3</span></div>
+          <div class="spalte-body">
+            <div class="karte k-idee">
+              <span class="k-id">Eingang Fachbereich</span>
+              <h4>Predictive Maintenance Spender</h4>
+              <p>Störungsdaten der Spendersysteme als Frühindikator für Wartungsbedarf.</p>
+            </div>
+            <div class="karte k-idee">
+              <span class="k-id">Eingang Vertrieb</span>
+              <h4>Automatisierte Angebotserstellung</h4>
+              <p>Angebotsentwürfe aus CRM-Daten und Preislogik vorbelegen.</p>
+            </div>
+            <div class="karte k-idee">
+              <span class="k-id">Eingang Operations</span>
+              <h4>Waschprozess-Optimierung Energie</h4>
+              <p>Energieeinsatz je Charge datenbasiert senken.</p>
+            </div>
+          </div>
+          <div class="gate"><b>Gate 1</b>Sponsor benannt · Problem quantifiziert</div>
+        </div>
+
+        <div class="spalte">
+          <div class="spalte-kopf"><h3>Bewertung</h3><span class="anzahl">3</span></div>
+          <div class="spalte-body">
+            <div class="karte k-konzept">
+              <span class="k-id">UC-09</span>
+              <h4>Reklamations-Clustering Kundenservice</h4>
+              <p>Reklamationsgründe automatisch bündeln, Ursachen je Standort sichtbar machen.</p>
+            </div>
+            <div class="karte k-konzept">
+              <span class="k-id">UC-10</span>
+              <h4>Absatzprognose Neugeschäft</h4>
+              <p>Wertbeitrag-Nachweis läuft; Datenzugang mit Vertrieb in Klärung.</p>
+            </div>
+            <div class="karte k-stop">
+              <span class="k-id">UC-08</span>
+              <h4>CV-Vorauswahl Recruiting</h4>
+              <p>Hochrisiko nach Anhang III — Aufwand übersteigt Nutzen.</p>
+              <span class="chip stop k-stopchip">Gestoppt an Gate 2</span>
+            </div>
+          </div>
+          <div class="gate"><b>Gate 2</b>Wertbeitrag &gt; 3× Kosten · AI-Act-Klassifizierung · Datenzugang</div>
+        </div>
+
+        <div class="spalte">
+          <div class="spalte-kopf"><h3>Konzeption</h3><span class="anzahl">3</span></div>
+          <div class="spalte-body">
+            <div class="karte k-konzept">
+              <span class="k-id">UC-05</span>
+              <h4>RAG-Wissensassistent Servicetechniker</h4>
+              <p>Architektur-Review terminiert, DSFA in Arbeit.</p>
+            </div>
+            <div class="karte k-konzept">
+              <span class="k-id">UC-07</span>
+              <h4>Anomalieerkennung Waschchemie-Dosierung</h4>
+              <p>Sensorik-Datenlage geprüft, Human-in-the-Loop-Design offen.</p>
+            </div>
+            <div class="karte k-konzept">
+              <span class="k-id">UC-11</span>
+              <h4>Personaleinsatz-Forecast Wäschereien</h4>
+              <p>Schichtplanung mit Bedarfsprognose koppeln.</p>
+            </div>
+          </div>
+          <div class="gate"><b>Gate 3</b>Architektur-Review · DSFA · Human-in-the-Loop definiert</div>
+        </div>
+
+        <div class="spalte s-pilot">
+          <div class="spalte-kopf"><h3>Pilot</h3><span class="anzahl">2</span></div>
+          <div class="spalte-body">
+            <div class="karte k-pilot">
+              <span class="k-id">UC-01</span>
+              <h4>Tourenoptimierung Servicefahrzeuge</h4>
+              <p>Pilot in 2 Depots, −11 % Fahrzeit erreicht — Gate 4 zum Quartalsende.</p>
+            </div>
+            <div class="karte k-pilot">
+              <span class="k-id">UC-04</span>
+              <h4>Churn-Frühwarnung Mietverträge</h4>
+              <p>Pilot Region Süd; Vertrieb arbeitet mit wöchentlicher Risikoliste.</p>
+            </div>
+          </div>
+          <div class="gate"><b>Gate 4</b>KPI im Pilot erreicht · Betriebskonzept · Schulung</div>
+        </div>
+
+        <div class="spalte s-prod">
+          <div class="spalte-kopf"><h3>Produktion</h3><span class="anzahl">3</span></div>
+          <div class="spalte-body">
+            <div class="karte k-prod">
+              <span class="k-id">UC-02</span>
+              <h4>Bedarfsprognose Textilbestand</h4>
+              <p>11 Wäschereien live, Prognosegüte im Wochen-Monitoring.</p>
+            </div>
+            <div class="karte k-prod">
+              <span class="k-id">UC-03</span>
+              <h4>E-Mail-Triage Kundenservice</h4>
+              <p>Produktivbetrieb; Freigabequote der Entwürfe bei 87 %.</p>
+            </div>
+            <div class="karte k-prod">
+              <span class="k-id">UC-06</span>
+              <h4>Beleg- &amp; Lieferscheinprüfung</h4>
+              <p>72 % Dunkelverarbeitung, GoBD-Audit-Trail aktiv.</p>
+            </div>
+          </div>
+          <div class="gate"><b>Betrieb</b>Wöchentliche Qualitätsmetriken · Eskalationspfad · Modell-Reviews</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 03: ROADMAP & TEAM ============ -->
+    <section id="v3" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„Der Aufbau eines zentralen AI Center of Excellence liegt bei dir — einschließlich der fachlichen und disziplinarischen Führung des neu entstehenden Teams.“</p>
+      </div>
+      <h1 class="view-title">Roadmap &amp; Teamaufbau</h1>
+      <p class="view-sub">Vier Quartale vom Fundament zur Skalierung — Personal wächst mit der Pipeline, nicht vor ihr.</p>
+
+      <div class="roadmap">
+        <div class="quartal done">
+          <div class="quartal-kopf"><h3>Q3/26</h3><span class="q-tag done">abgeschlossen</span></div>
+          <div class="q-thema">Fundament</div>
+          <ul>
+            <li>CoE-Setup: Mandat, Priorisierungslogik, Portfolio-Prozess</li>
+            <li>AI-Act-Inventar aller Systeme, Governance-Rahmen v1</li>
+            <li>Zwei Quick Wins produktiv (UC-03, UC-06)</li>
+            <li>Baseline-Messung der Kernprozesse mit den Fachbereichen</li>
+          </ul>
+        </div>
+        <div class="quartal aktuell">
+          <div class="quartal-kopf"><h3>Q4/26</h3><span class="q-tag aktuell">aktuell</span></div>
+          <div class="q-thema">Skalierung</div>
+          <ul>
+            <li>Onboarding 2× AI Engineer</li>
+            <li>UC-01 und UC-04: Pilot → Produktion über Gate 4</li>
+            <li>Data-Warehouse-Ausbau gemeinsam mit IT</li>
+            <li>AI-Literacy-Welle 2 · Lieferanten-Assessment LLM-Provider</li>
+          </ul>
+        </div>
+        <div class="quartal">
+          <div class="quartal-kopf"><h3>Q1/27</h3><span class="q-tag">geplant</span></div>
+          <div class="q-thema">Integration</div>
+          <ul>
+            <li>Data Engineer und BPM-Consultant an Bord</li>
+            <li>DMS-Anbindung, Prozess-Baselines flächendeckend</li>
+            <li>UC-05 Wissensassistent in den Pilot</li>
+            <li>Self-Service-Berichte für Fachbereiche</li>
+          </ul>
+        </div>
+        <div class="quartal">
+          <div class="quartal-kopf"><h3>Q2/27</h3><span class="q-tag">geplant</span></div>
+          <div class="q-thema">Vorausschau</div>
+          <ul>
+            <li>Predictive Maintenance Spender: Bewertung → Pilot</li>
+            <li>Evaluation agentischer Workflows an zwei Prozessen</li>
+            <li>Übertragbarkeit auf weitere Landesgesellschaften prüfen</li>
+            <li>Portfolio-Review: Nutzennachweis je Use Case</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prinzip">
+        <span class="p-label">Prinzip</span>
+        <p>Jedes Quartal liefert produktive Ergebnisse — keine 18-Monats-Strategiephase ohne Output.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="panel">
+          <div class="panel-title">Teamaufbau AI- &amp; Business-Process-Management-Einheit</div>
+          <div class="panel-sub">Besetzung folgt dem Use-Case-Bedarf</div>
+          <div class="rolle">
+            <div class="rolle-name">Teamlead AI<small>Portfolio, Führung, Governance, Stakeholder</small></div>
+            <span class="chip prod">besetzt</span>
+          </div>
+          <div class="rolle">
+            <div class="rolle-name">2× AI Engineer<small>Modellentwicklung, MLOps, produktiver Betrieb</small></div>
+            <span class="chip pilot">Q4/26</span>
+          </div>
+          <div class="rolle">
+            <div class="rolle-name">Data Engineer<small>Datenpipelines, DWH-Anbindung, Datenqualität</small></div>
+            <span class="chip konzept">Q1/27</span>
+          </div>
+          <div class="rolle">
+            <div class="rolle-name">BPM / Process Consultant<small>Prozess-Baselines, Redesign, Adoption in den Fachbereichen</small></div>
+            <span class="chip konzept">Q1/27</span>
+          </div>
+          <div class="rolle">
+            <div class="rolle-name">2× Werkstudierende<small>Evaluation, Datenaufbereitung, interne Enablement-Formate</small></div>
+            <span class="chip neutral">flexibel</span>
+          </div>
+          <div class="fuehrung">„Jede Stelle wird durch die Pipeline gerechtfertigt, nicht umgekehrt.“</div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Führungsverständnis</div>
+          <div class="panel-sub">Fachlich und disziplinarisch</div>
+          <ul class="leitplanken">
+            <li><b>Zieldefinition über Wertbeitrag:</b> jedes Teammitglied kennt den Business-Effekt seiner Use Cases — nicht nur die Modellmetrik.</li>
+            <li><b>Wöchentliches Portfolio-Review</b> statt Statusberichte: Blocker werden im Termin entschieden, nicht dokumentiert.</li>
+            <li><b>Pairing mit Fachbereichen:</b> Engineers arbeiten phasenweise direkt im Prozess — Wäscherei, Service, Vertrieb.</li>
+            <li><b>Entwicklung:</b> Konferenz- und Zertifizierungsbudget je Kopf, interne Tech-Sessions vierzehntägig.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAB 04: INTEGRATION ============ -->
+    <section id="v4" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„Gemeinsam mit Fachbereichen und IT integrierst du AI-Lösungen in bestehende Systeme wie CRM-, ERP- und Datenplattformen.“</p>
+      </div>
+      <h1 class="view-title">Integration in die Systemlandschaft</h1>
+      <p class="view-sub">AI-Lösungen entstehen nicht neben der IT, sondern in ihr: definierte Schnittstellen, klare Verantwortung, kein Schatten-Stack. Systemnamen generisch — die konkrete Landschaft wird gemeinsam mit der IT aufgenommen.</p>
+
+      <div class="systeme">
+        <div class="system">
+          <div class="system-kopf"><h3>ERP</h3><span class="chip prod">angebunden</span></div>
+          <p>Stamm- und Bewegungsdaten für Disposition und Belegprüfung; Rückschreiben nur über freigegebene Schnittstellen.</p>
+          <div class="s-nutzer">genutzt von UC-02 · UC-06</div>
+        </div>
+        <div class="system">
+          <div class="system-kopf"><h3>CRM</h3><span class="chip prod">angebunden</span></div>
+          <p>Vertrags- und Kontakthistorie als Modell-Input; Risikolisten und Empfehlungen erscheinen im gewohnten Arbeitsbild des Vertriebs.</p>
+          <div class="s-nutzer">genutzt von UC-03 · UC-04</div>
+        </div>
+        <div class="system">
+          <div class="system-kopf"><h3>Data Warehouse</h3><span class="chip pilot">Ausbau Q4/26</span></div>
+          <p>Zentrale Datenbasis für Training und Monitoring; Ausbau der kuratierten Datenprodukte gemeinsam mit IT.</p>
+          <div class="s-nutzer">genutzt von UC-02 · UC-04 · UC-10</div>
+        </div>
+        <div class="system">
+          <div class="system-kopf"><h3>Telematik Flotte</h3><span class="chip pilot">Pilot</span></div>
+          <p>Positions- und Fahrzeitdaten der Servicefahrzeuge für die Tourenoptimierung; Anbindung über bestehende Hersteller-Schnittstelle.</p>
+          <div class="s-nutzer">genutzt von UC-01</div>
+        </div>
+        <div class="system">
+          <div class="system-kopf"><h3>DMS / Archiv</h3><span class="chip konzept">Q1/27</span></div>
+          <p>Wartungshandbücher und Serviceberichte als Wissensbasis für den RAG-Assistenten; Berechtigungen bleiben im Quellsystem.</p>
+          <div class="s-nutzer">geplant für UC-05</div>
+        </div>
+        <div class="system">
+          <div class="system-kopf"><h3>HR-Systeme</h3><span class="chip stop">on hold</span></div>
+          <p>Bewusst nicht angebunden: einziger Bedarfsträger war UC-08 (zurückgestellt). Keine Integration ohne genehmigten Use Case.</p>
+          <div class="s-nutzer">kein aktiver Use Case</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Architektur-Leitplanken</div>
+        <div class="panel-sub">Gelten für jeden Use Case — Abweichung nur mit dokumentierter Entscheidung</div>
+        <ul class="leitplanken">
+          <li><b>API-first, lose Kopplung:</b> AI-Services sprechen über definierte Schnittstellen mit Bestandssystemen — kein direkter Datenbankzugriff, keine Punkt-zu-Punkt-Verdrahtung.</li>
+          <li><b>EU-Datenresidenz:</b> Verarbeitung personenbezogener und vertraulicher Daten ausschließlich in EU-Rechenzentren.</li>
+          <li><b>Provider-Exit-Fähigkeit:</b> LLM-Zugriff über ein Gateway mit austauschbarem Modell-Backend — kein Lock-in auf einen Anbieter.</li>
+          <li><b>Human-in-the-Loop je Workflow:</b> für jeden Use Case ist definiert, welche Entscheidung beim Menschen bleibt und wie eingegriffen wird.</li>
+          <li><b>Monitoring &amp; Audit-Trail:</b> Modellgüte, Nutzung und Eingriffe werden protokolliert — GoBD-konform, revisionssicher.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ TAB 05: GOVERNANCE & ENABLEMENT ============ -->
+    <section id="v5" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„Governance-, Compliance- und Qualitätsstandards etablierst du unter Berücksichtigung regulatorischer Anforderungen (z. B. EU AI Act) — und förderst AI-Enablement durch Trainings, Wissenstransfer und Change-Management.“</p>
+      </div>
+      <h1 class="view-title">Governance &amp; Enablement</h1>
+      <p class="view-sub">Governance ist kein Bremsklotz, sondern die Voraussetzung dafür, dass Use Cases in Produktion gehen dürfen — und Enablement entscheidet, ob sie dort auch genutzt werden.</p>
+
+      <div class="gov-grid">
+        <div>
+          <div class="panel">
+            <div class="panel-title">AI-Act-Risikoklassen im Portfolio</div>
+            <div class="panel-sub">14 Systeme klassifiziert · Stand Q4/26</div>
+            <div class="risiko-zeile">
+              <div class="risiko-name">Minimal<small>Art. 95 ff.</small></div>
+              <div class="risiko-balken"><i class="rb-min" style="width:64%"></i></div>
+              <div class="risiko-anzahl">9</div>
+            </div>
+            <div class="risiko-zeile">
+              <div class="risiko-name">Begrenzt<small>Transparenz Art. 50</small></div>
+              <div class="risiko-balken"><i class="rb-beg" style="width:29%"></i></div>
+              <div class="risiko-anzahl">4</div>
+            </div>
+            <div class="risiko-zeile">
+              <div class="risiko-name">Hoch<small>Anhang III</small></div>
+              <div class="risiko-balken"><i class="rb-hoch" style="width:7%"></i></div>
+              <div class="risiko-anzahl">1</div>
+            </div>
+            <div class="risiko-zeile">
+              <div class="risiko-name">Verboten<small>Art. 5</small></div>
+              <div class="risiko-balken"></div>
+              <div class="risiko-anzahl">0</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Compliance-Status</div>
+            <div class="panel-sub">Laufende Pflichten und Prüfungen</div>
+            <ul class="check-liste">
+              <li><span class="check-status">3/3 ✓</span><span><b>Datenschutz-Folgenabschätzungen (Art. 35 DSGVO)</b><small>für alle Use Cases mit personenbezogenen Daten abgeschlossen</small></span></li>
+              <li><span class="check-status">umgesetzt</span><span><b>Transparenzpflichten Art. 50 EU AI Act</b><small>Kennzeichnung AI-generierter Inhalte in UC-03, Vorgabe für UC-05</small></span></li>
+              <li><span class="check-status offen">Review Q4</span><span><b>Lieferanten-Assessment LLM-Provider</b><small>Datenresidenz, Auftragsverarbeitung, Exit-Szenario — jährlicher Zyklus</small></span></li>
+              <li><span class="check-status">etabliert</span><span><b>Hochrisiko-Prüfung vor Gate 2</b><small>UC-08 als dokumentierter Präzedenzfall: Nein ist ein gültiges Ergebnis</small></span></li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="panel">
+            <div class="panel-title">Enablement-Programm</div>
+            <div class="panel-sub">Stand Q4/26 · Ziel: Nutzung, nicht Teilnahme</div>
+            <div class="fortschritt">
+              <div class="fortschritt-kopf"><b>AI Literacy (Art. 4 EU AI Act)</b><span>300 / 450 Mitarbeitende</span></div>
+              <div class="fortschritt-balken"><i style="width:67%"></i></div>
+            </div>
+            <div class="fortschritt">
+              <div class="fortschritt-kopf"><b>AI-Champions in den Fachbereichen</b><span>9 / 12 Bereiche</span></div>
+              <div class="fortschritt-balken"><i style="width:75%"></i></div>
+            </div>
+            <div class="fortschritt">
+              <div class="fortschritt-kopf"><b>Führungskräfte-Briefings</b><span>4 / 4 Bereiche</span></div>
+              <div class="fortschritt-balken"><i style="width:100%"></i></div>
+            </div>
+            <ul class="format-liste">
+              <li><b>Basisschulung AI Literacy:</b> verpflichtend für alle Rollen mit AI-Systemkontakt (Art. 4).</li>
+              <li><b>Prompt-Workshops an echten CWS-Prozessen</b> — Reklamation, Angebot, Servicebericht — statt generischer Tool-Demos.</li>
+              <li><b>Wöchentliche AI-Sprechstunde:</b> offenes Format für Fragen und Use-Case-Ideen aus den Fachbereichen.</li>
+              <li><b>Adoption-Messung:</b> aktive Nutzung je System statt Schulungsquote — was nicht genutzt wird, wird nachgebessert oder abgeschaltet.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="demo-note">
+    <b>Hinweis:</b> Konzept-Prototyp zur Veranschaulichung der Arbeitsweise. Alle Kennzahlen, Use Cases, Termine und Systemzuordnungen sind illustrative Annahmen — keine realen CWS-Daten. Die konkrete Ausgestaltung entsteht im Dialog mit Fachbereichen, IT und Datenschutz.
+  </div>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Tab-Navigation */
+  var navItems = document.querySelectorAll(".nav-item");
+  var views = document.querySelectorAll(".view");
+  function zeigeView(id){
+    views.forEach(function(v){ v.classList.toggle("active", v.id === id); });
+    navItems.forEach(function(n){ n.classList.toggle("active", n.dataset.view === id); });
+  }
+  navItems.forEach(function(btn){
+    btn.addEventListener("click", function(){ zeigeView(btn.dataset.view); });
+  });
+
+  /* Portfolio-Tabelle: Zeilen auf-/zuklappen */
+  document.querySelectorAll("tr.uc-row").forEach(function(row){
+    function toggle(){
+      var detail = row.nextElementSibling;
+      var offen = row.classList.toggle("open");
+      if (detail && detail.classList.contains("uc-detail")) {
+        detail.classList.toggle("open", offen);
+      }
+      row.querySelector(".caret").textContent = offen ? "▾" : "▸";
+    }
+    row.addEventListener("click", toggle);
+    row.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
