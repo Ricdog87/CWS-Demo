@@ -569,6 +569,53 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 }
 .demo-note b{color:var(--ink)}
 
+/* ---------- Feature A: Presenter-Mode ---------- */
+.p-hint{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.625rem;color:#9B9DA0}
+body.presenter .sidebar{display:none}
+body.presenter .demo-note{display:none}
+body.presenter .main{max-width:1600px;margin:0 auto;width:100%}
+
+/* ---------- Feature B: Prozess-Baselines (BPM) ---------- */
+.detail-prozess{margin-top:14px;padding-top:10px;border-top:1px solid var(--linie)}
+.detail-prozess h4{
+  font-family:var(--font-display);
+  font-size:.65rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--rot);
+  margin-bottom:4px;
+}
+.detail-prozess p.mono{font-family:var(--font-mono);font-size:.72rem;color:var(--ink)}
+.k-prozess{
+  font-family:var(--font-mono);
+  font-size:.625rem;
+  color:var(--ink);
+  margin-top:8px;
+  padding-top:6px;
+  border-top:1px solid var(--bg);
+}
+.k-prozess b{font-family:var(--font-display);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--grau)}
+
+/* ---------- Feature C: Filter-Chips ---------- */
+.filter-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.fchip{
+  font-family:var(--font-display);
+  font-size:.675rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:5px 12px;
+  background:var(--panel);
+  border:1px solid var(--linie);
+  color:var(--grau);
+  cursor:pointer;
+}
+.fchip:hover{border-color:var(--grau);color:var(--ink)}
+.fchip.active{background:var(--rot);border-color:var(--rot);color:#fff}
+tr.uc-row.gefiltert{display:none}
+tr.uc-detail.gefiltert{display:none}
+
 /* ---------- Responsiv ---------- */
 @media (max-width:1400px){
   .kanban{grid-template-columns:repeat(5,1fr);gap:10px}
@@ -594,6 +641,30 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
   .kanban{grid-template-columns:repeat(2,1fr)}
   .detail-grid{grid-template-columns:1fr}
 }
+/* ---------- Feature F: Druck (A4 quer, Tab 01) ---------- */
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:11px}
+  body{display:block;background:#fff}
+  .sidebar,.demo-note,.filter-chips,.zitat,.view-sub{display:none!important}
+  .kpibar{position:static;border:1px solid var(--linie)}
+  .content{padding:10px 0 0}
+  .view{display:none!important}
+  #v1{display:block!important}
+  .grid-2{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)!important;gap:12px}
+  .panel{page-break-inside:avoid;margin-bottom:12px;padding:14px}
+  .matrix{aspect-ratio:auto;height:390px}
+  .matrix-legende{margin-top:8px}
+  .view-title::after{
+    content:" — Konzept-Prototyp · Ricardo Serrano · Teamlead AI JR1013216";
+    font-family:var(--font-body);
+    font-size:.7rem;
+    font-weight:400;
+    color:var(--grau);
+  }
+  .dot .tip{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -614,6 +685,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
     Konzept-Prototyp<br>
     Ricardo Serrano · Juli 2026<br>
     Teamlead AI · JR1013216
+    <span class="p-hint">P = Präsentation · 1–5 = Views</span>
   </div>
 </aside>
 
@@ -621,19 +693,19 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 
   <header class="kpibar">
     <div class="kpi">
-      <div class="kpi-value">14</div>
+      <div class="kpi-value" data-count="14" data-dec="0">14</div>
       <div class="kpi-label">Use Cases im Portfolio</div>
     </div>
     <div class="kpi">
-      <div class="kpi-value">1.240 h</div>
+      <div class="kpi-value" data-count="1240" data-dec="0" data-suffix=" h">1.240 h</div>
       <div class="kpi-label">Prozessstunden gespart / Monat</div>
     </div>
     <div class="kpi">
-      <div class="kpi-value">2,4 Mio €</div>
+      <div class="kpi-value" data-count="2.4" data-dec="1" data-suffix=" Mio €">2,4 Mio €</div>
       <div class="kpi-label">Wertbeitrag-Pipeline p. a.</div>
     </div>
     <div class="kpi">
-      <div class="kpi-value">100 %</div>
+      <div class="kpi-value" data-count="100" data-dec="0" data-suffix=" %">100 %</div>
       <div class="kpi-label">EU-AI-Act-Konformität</div>
     </div>
   </header>
@@ -653,6 +725,13 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
         <div class="panel">
           <div class="panel-title">Use-Case-Portfolio</div>
           <div class="panel-sub">Top 7 von 14 nach Wertbeitrag · illustrative Daten</div>
+          <div class="filter-chips" role="group" aria-label="Portfolio nach Status filtern">
+            <button class="fchip active" data-filter="alle">Alle</button>
+            <button class="fchip" data-filter="prod">Produktion</button>
+            <button class="fchip" data-filter="pilot">Pilot</button>
+            <button class="fchip" data-filter="konzept">Konzeption</button>
+            <button class="fchip" data-filter="stop">Zurückgestellt</button>
+          </div>
           <div class="tabelle-scroll">
           <table class="uc">
             <thead>
@@ -679,6 +758,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>Tägliche Tourenplanung per Optimierungs-Solver (Vehicle Routing), Fahrzeitprognose aus Telematik-Historie. Disponenten behalten die letzte Entscheidung.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Python · OR-Tools · Telematik-Schnittstelle · Dispositions-Dashboard</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø 212 km je Tour → 189 km (−11 %) · Tourenplanung 45 Min/Depot/Tag → 12 Min</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="prod" tabindex="0">
@@ -695,6 +775,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>Zeitreihenprognose je Artikel und Standort, nächtliches Batch-Scoring, Vorschlagswerte direkt in der Bestandsdisposition. Ausgerollt auf 11 Wäschereien.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Python · Gradient Boosting · Data Warehouse · Dispositions-Integration</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Fehlmengenquote 3,1 % → 1,8 % · Sicherheitsbestand −14 %</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="prod" tabindex="0">
@@ -711,6 +792,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>LLM-Klassifikation plus Entwurfsgenerierung; jede Antwort wird von Mitarbeitenden freigegeben (Human-in-the-Loop). Transparenzpflicht nach Art. 50 umgesetzt.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">EU-gehostetes LLM · API-Gateway · Ticketsystem-Integration</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø 4,2 Min/Mail → 2,6 Min (−38 %) · Erstantwort 26 h → 9 h</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="pilot" tabindex="0">
@@ -727,6 +809,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>Klassifikationsmodell auf Vertrags-, Service- und Reklamationsdaten; wöchentliche Risikoliste mit Begründung je Fall direkt im CRM.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Python · scikit-learn · SHAP-Erklärbarkeit · CRM-Integration</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">reaktive Kündigungsbearbeitung → 6 Monate Vorlauf · Rückgewinnungsquote 9 % → 22 % (Pilot)</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="konzept" tabindex="0">
@@ -743,6 +826,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>Retrieval-Augmented Generation über Wartungshandbücher und Serviceberichte; jede Antwort mit Quellenangabe, keine freie Generierung ohne Beleg.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Vektorsuche · EU-gehostetes LLM · Anbindung mobile Service-App</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø Suchzeit je Störfall 18 Min → Ziel 6 Min</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="prod" tabindex="0">
@@ -759,6 +843,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Ansatz</h4><p>OCR plus Prüfregeln und ML-Abgleich; 72 % laufen ohne manuellen Eingriff durch, nur Abweichungen gehen an die Sachbearbeitung. Audit-Trail GoBD-konform.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">OCR-Service · Workflow-Engine · ERP-Schnittstelle · Audit-Log</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø 3,5 Min/Beleg → 0,9 Min · 72 % ohne manuellen Eingriff</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="stop" tabindex="0">
@@ -775,6 +860,7 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
                     <div class="detail-block"><h4>Begründung</h4><p>Konformitätsbewertung, Grundrechte-Folgenabschätzung und laufende Aufsicht stehen in keinem Verhältnis zum erwarteten Nutzen von 120 T€.</p></div>
                     <div class="detail-block"><h4>Konsequenz</h4><p>Zurückgestellt mit dokumentierter Begründung; Wiedervorlage, sobald harmonisierte Normen die Konformitätskosten deutlich senken.</p></div>
                   </div>
+                  <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">keine Baseline erhoben — an Gate 2 gestoppt, bevor Prozessaufnahme beauftragt wurde</p></div>
                 </td>
               </tr>
             </tbody>
@@ -887,16 +973,19 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
               <span class="k-id">UC-05</span>
               <h4>RAG-Wissensassistent Servicetechniker</h4>
               <p>Architektur-Review terminiert, DSFA in Arbeit.</p>
+              <p class="k-prozess"><b>Prozess:</b> Ø Suchzeit 18 Min → 6 Min</p>
             </div>
             <div class="karte k-konzept">
               <span class="k-id">UC-07</span>
               <h4>Anomalieerkennung Waschchemie-Dosierung</h4>
               <p>Sensorik-Datenlage geprüft, Human-in-the-Loop-Design offen.</p>
+              <p class="k-prozess"><b>Prozess:</b> Chemie-Einsatz 12,4 g/kg → 11,2 g</p>
             </div>
             <div class="karte k-konzept">
               <span class="k-id">UC-11</span>
               <h4>Personaleinsatz-Forecast Wäschereien</h4>
               <p>Schichtplanung mit Bedarfsprognose koppeln.</p>
+              <p class="k-prozess"><b>Prozess:</b> Planung 6 h/Woche → 2 h</p>
             </div>
           </div>
           <div class="gate"><b>Gate 3</b>Architektur-Review · DSFA · Human-in-the-Loop definiert</div>
@@ -909,11 +998,13 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
               <span class="k-id">UC-01</span>
               <h4>Tourenoptimierung Servicefahrzeuge</h4>
               <p>Pilot in 2 Depots, −11 % Fahrzeit erreicht — Gate 4 zum Quartalsende.</p>
+              <p class="k-prozess"><b>Prozess:</b> Ø 212 km/Tour → 189 km</p>
             </div>
             <div class="karte k-pilot">
               <span class="k-id">UC-04</span>
               <h4>Churn-Frühwarnung Mietverträge</h4>
               <p>Pilot Region Süd; Vertrieb arbeitet mit wöchentlicher Risikoliste.</p>
+              <p class="k-prozess"><b>Prozess:</b> Rückgewinnung 9 % → 22 %</p>
             </div>
           </div>
           <div class="gate"><b>Gate 4</b>KPI im Pilot erreicht · Betriebskonzept · Schulung</div>
@@ -926,16 +1017,19 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
               <span class="k-id">UC-02</span>
               <h4>Bedarfsprognose Textilbestand</h4>
               <p>11 Wäschereien live, Prognosegüte im Wochen-Monitoring.</p>
+              <p class="k-prozess"><b>Prozess:</b> Fehlmenge 3,1 % → 1,8 %</p>
             </div>
             <div class="karte k-prod">
               <span class="k-id">UC-03</span>
               <h4>E-Mail-Triage Kundenservice</h4>
               <p>Produktivbetrieb; Freigabequote der Entwürfe bei 87 %.</p>
+              <p class="k-prozess"><b>Prozess:</b> Ø 4,2 Min/Mail → 2,6 Min</p>
             </div>
             <div class="karte k-prod">
               <span class="k-id">UC-06</span>
               <h4>Beleg- &amp; Lieferscheinprüfung</h4>
               <p>72 % Dunkelverarbeitung, GoBD-Audit-Trail aktiv.</p>
+              <p class="k-prozess"><b>Prozess:</b> Ø 3,5 Min/Beleg → 0,9 Min</p>
             </div>
           </div>
           <div class="gate"><b>Betrieb</b>Wöchentliche Qualitätsmetriken · Eskalationspfad · Modell-Reviews</div>
@@ -1205,6 +1299,62 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
   });
+
+  /* Feature C: Filter-Chips Portfolio */
+  var fchips = document.querySelectorAll(".fchip");
+  fchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      fchips.forEach(function(c){ c.classList.toggle("active", c === chip); });
+      var f = chip.dataset.filter;
+      document.querySelectorAll("tr.uc-row").forEach(function(row){
+        var raus = (f !== "alle" && row.dataset.status !== f);
+        row.classList.toggle("gefiltert", raus);
+        var detail = row.nextElementSibling;
+        if (detail && detail.classList.contains("uc-detail")) {
+          detail.classList.toggle("gefiltert", raus);
+        }
+      });
+    });
+  });
+
+  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–5 = Views */
+  document.addEventListener("keydown", function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+    if (e.key === "p" || e.key === "P") {
+      document.body.classList.toggle("presenter");
+    } else if (e.key >= "1" && e.key <= "5") {
+      zeigeView("v" + e.key);
+    }
+  });
+
+  /* Feature E: KPI-Count-up beim ersten Laden (800 ms) */
+  var reduziert = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduziert) {
+    var DAUER = 800;
+    document.querySelectorAll(".kpi-value[data-count]").forEach(function(el){
+      var ziel = parseFloat(el.dataset.count);
+      var dez = parseInt(el.dataset.dec, 10) || 0;
+      var suffix = el.dataset.suffix || "";
+      var endText = el.textContent;
+      var start = null;
+      function schritt(ts){
+        if (start === null) start = ts;
+        var f = Math.min((ts - start) / DAUER, 1);
+        f = 1 - Math.pow(1 - f, 3); /* ease-out */
+        if (f < 1) {
+          el.textContent = (ziel * f).toLocaleString("de-DE", {
+            minimumFractionDigits: dez, maximumFractionDigits: dez
+          }) + suffix;
+          requestAnimationFrame(schritt);
+        } else {
+          el.textContent = endText;
+        }
+      }
+      requestAnimationFrame(schritt);
+    });
+  }
 })();
 </script>
 </body>
