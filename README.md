@@ -8,8 +8,11 @@ wörtlich einen Aufgaben-Bullet aus der Stellenanzeige (Zitatblock oben in jedem
 
 ## Live-Demo
 
-> Deployment auf Vercel läuft — URL wird hier nachgetragen, sobald die
-> einmalige Vercel-Anmeldung bestätigt ist. (Projekt: `ai-cockpit-konzept`)
+**https://ai-cockpit-konzept.vercel.app**
+
+(Vercel-Projekt `ai-cockpit-konzept`, Production-Deployment. Nach dem Deploy
+verifiziert: HTTP 200, ausgelieferte Datei byte-identisch mit diesem Repo,
+kompletter Klick-Durchlauf aller Views und Features grün.)
 
 Lokal: `index.html` direkt im Browser öffnen — keine Abhängigkeiten, kein Build.
 
