@@ -76,6 +76,18 @@ Damit ist der Ehrlichkeits-Rahmen gesetzt, bevor jemand fragt.
   BR ab Gate 2, § 87 BetrVG.
 - **„Warum kein Recruiting-Use-Case?"** → UC-08-Detailzeile jetzt aufklappen
   (Anhang III, AI Board, Wiedervorlage).
+- **„Was kostet uns Ihre Einheit?"** → Team-Panel Tab 3: Vollausbau ≈ 1,0 Mio €
+  gegen 3,1 Mio € Pipeline — *„die Einheit hält ihre eigene Gate-2-Regel."*
+- **„Was wären Ihre ersten 90 Tage?"** → auf die Q3/26-Kachel zeigen: Mandat +
+  Lenkungskreis, Use-Case-Inventur mit den Fachbereichen, AI-Act-Inventar,
+  ein Quick Win in Produktion, Baseline-Messung. *„Genau das ist Q3 — die
+  Roadmap beginnt nicht zufällig mit einem lieferenden Quartal."*
+- **„Und Nachhaltigkeit?"** → UC-01 (−80 t CO₂ Flotte), UC-02 (weniger
+  Neuproduktion im Textil-Kreislauf), Ideen-Karte Energie je Waschcharge —
+  *„AI zahlt bei CWS direkt auf das Markenversprechen ein, nicht nur auf Kosten."*
+- **„Woran scheitern solche Initiativen sonst?"** → Adoption und Datenqualität.
+  Deshalb: BPM-Rolle im Team, Data Engineer Q1/27, Adoption-Messung statt
+  Schulungsquote, Sunset-Kriterium im Betrieb.
 
 ## Wenn etwas schiefgeht
 
