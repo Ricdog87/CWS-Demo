@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CWS AI Cockpit — Konzept-Prototyp</title>
 <meta name="description" content="Konzept-Prototyp: Steuerung eines AI Center of Excellence bei CWS Workwear. Ricardo Serrano, Bewerbung Teamlead AI (JR1013216).">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="CWS AI Cockpit — Konzept-Prototyp">
+<meta property="og:description" content="Wie ich ein AI Center of Excellence bei CWS steuern würde. Demo-Daten, echtes Vorgehen. Ricardo Serrano · Teamlead AI · JR1013216.">
+<meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23E2001A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -596,6 +600,64 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 }
 .demo-note b{color:var(--ink)}
 
+/* ---------- Lesehilfe (Erklär-Modus, Taste E) ---------- */
+.lesehilfe{
+  display:none;
+  background:var(--panel);
+  border:1px solid var(--linie);
+  border-left:4px solid var(--gelb);
+  padding:12px 16px;
+  margin-bottom:20px;
+  font-size:.78rem;
+  color:var(--grau);
+  line-height:1.6;
+  max-width:80em;
+}
+.lesehilfe b{color:var(--ink);font-weight:600}
+.lesehilfe-label{
+  display:block;
+  font-family:var(--font-display);
+  font-size:.625rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--ink);
+  margin-bottom:3px;
+}
+.lesehilfe-label::before{
+  content:"";
+  display:inline-block;
+  width:8px;height:8px;
+  background:var(--gelb);
+  margin-right:7px;
+}
+body.erklaert .lesehilfe{display:block}
+body.presenter .lesehilfe{display:none!important}
+.erklaer-toggle{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:6px 8px;
+  background:var(--panel);
+  border:1px solid var(--linie);
+  font-family:var(--font-display);
+  font-size:.625rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--grau);
+  cursor:pointer;
+  text-align:left;
+}
+.erklaer-toggle::before{
+  content:"";
+  display:inline-block;
+  width:8px;height:8px;
+  background:var(--gelb);
+  margin-right:7px;
+}
+.erklaer-toggle:hover{border-color:var(--grau);color:var(--ink)}
+
 /* ---------- Feature A: Presenter-Mode ---------- */
 .p-hint{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.625rem;color:var(--grau)}
 body.presenter .sidebar{display:none}
@@ -675,7 +737,7 @@ tr.uc-detail.gefiltert{display:none}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html{font-size:11px}
   body{display:block;background:#fff}
-  .sidebar,.demo-note,.filter-chips,.zitat,.view-sub{display:none!important}
+  .sidebar,.demo-note,.filter-chips,.zitat,.view-sub,.lesehilfe{display:none!important}
   .kpibar{position:static;border:1px solid var(--linie)}
   .content{padding:10px 0 0}
   .view{display:none!important}
@@ -716,7 +778,8 @@ tr.uc-detail.gefiltert{display:none}
     Konzept-Prototyp<br>
     Ricardo Serrano · Juli 2026<br>
     Teamlead AI · JR1013216
-    <span class="p-hint">P = Präsentation · 1–5 = Views</span>
+    <button class="erklaer-toggle" id="erklaerToggle" aria-pressed="true">Erklärungen ausblenden</button>
+    <span class="p-hint">P = Präsentation · 1–5 = Views · E = Erklärungen</span>
   </div>
 </aside>
 
@@ -743,12 +806,18 @@ tr.uc-detail.gefiltert{display:none}
 
   <div class="content">
 
+    <div class="lesehilfe">
+      <span class="lesehilfe-label">Lesehilfe · Demo-Daten</span>
+      Dieses Cockpit ist ein <b>Konzept-Prototyp</b> zur Bewerbung als Teamlead AI (Ref. JR1013216): Es zeigt, wie ich ein AI Center of Excellence bei CWS steuern würde. <b>Alle Zahlen sind Demo-Daten</b> — dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026). Der rote Block in jedem View zitiert wörtlich eine Aufgabe aus der Stellenanzeige; der View darunter ist meine Antwort darauf. Navigation: Tasten <b>1–5</b> wechseln die Views, <b>E</b> blendet diese Hinweise aus, <b>P</b> startet den Präsentationsmodus.
+    </div>
+
     <!-- ============ TAB 01: STRATEGIE & PORTFOLIO ============ -->
     <section id="v1" class="view active">
       <div class="zitat">
         <div class="zitat-label">Aus dem Stellenprofil</div>
         <p>„AI-Use-Cases identifizierst, bewertest und priorisierst du nach Business-Mehrwert und erwartetem Return on Investment.“</p>
       </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Jede Zeile ist ein bewerteter Use Case: <b>Wertbeitrag</b> als Balken, <b>AI-Act-Risikoklasse</b> daneben. Zeile anklicken — dann öffnen sich Ziel, Ansatz, Stack, Prozess-Baseline und Business Case (Invest, Payback). Die Zeile <b>UC-08</b> ist bewusst gestoppt: Hochrisiko nach Anhang III, Compliance-Aufwand übersteigt den Nutzen — Priorisierung heißt auch Nein sagen. Matrix rechts: je weiter oben links ein Punkt, desto eher wird gebaut.</div>
       <h1 class="view-title">Strategie &amp; Portfolio</h1>
       <p class="view-sub">Ein Portfolio statt Einzelprojekte: jeder Use Case mit quantifiziertem Wertbeitrag, AI-Act-Klassifizierung und klarer Priorisierung. Zeile anklicken für Ziel, Ansatz und Stack. Das Portfolio deckt bewusst alle drei Hebel ab: Generative AI (UC-03, UC-05), Advanced Analytics (UC-02, UC-04), Prozessautomatisierung (UC-06).</p>
 
@@ -950,6 +1019,7 @@ tr.uc-detail.gefiltert{display:none}
         <div class="zitat-label">Aus dem Stellenprofil</div>
         <p>„Du verantwortest den gesamten AI-Lifecycle – von der Idee über Konzeption und Entwicklung bis zum produktiven Einsatz.“</p>
       </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Von links nach rechts reift ein Use Case. Die graue Fußzeile jeder Spalte nennt das <b>Gate-Kriterium</b>, das er bestehen muss, um weiterzurücken — was es nicht besteht, wird nicht gebaut. Ab Konzeption trägt jede Karte eine <b>Prozess-Baseline</b>: Die Einheit verantwortet AI und Business Process Management gemeinsam, deshalb wird jeder Case am Prozess gemessen, nicht an der Modellmetrik.</div>
       <h1 class="view-title">AI-Lifecycle: Stage-Gate-Steuerung</h1>
       <p class="view-sub">Jeder Use Case durchläuft fünf Stufen mit harten Gate-Kriterien. Was ein Gate nicht besteht, wird nicht weitergezogen — so bleibt die Pipeline ehrlich.</p>
 
@@ -1077,6 +1147,7 @@ tr.uc-detail.gefiltert{display:none}
         <p>„Du entwickelst und verantwortest eine unternehmensweite AI-Strategie inklusive Roadmap zur nachhaltigen Implementierung.“</p>
         <p>„Der Aufbau eines zentralen AI Center of Excellence liegt bei dir – einschließlich der fachlichen und disziplinarischen Führung des neu entstehenden Teams.“</p>
       </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Oben die ersten vier Quartale — <b>jedes liefert produktive Ergebnisse</b>, keine Strategiephase ohne Output. Darunter der Teamaufbau: Rollen werden erst besetzt, wenn die Use-Case-Pipeline sie rechtfertigt. Q2/27 zeigt die Richtung danach: europäische Landesgesellschaften, agentische Prozesse, Zielbild 2028+.</div>
       <h1 class="view-title">Roadmap &amp; Teamaufbau</h1>
       <p class="view-sub">Drei Stoßrichtungen tragen die Strategie: Effizienz im Kerngeschäft, Kundenbindung, datenbasierte Services. Vier Quartale vom Fundament zur Skalierung — Personal wächst mit der Pipeline, nicht vor ihr; ab 2027/28 folgt der Ausbau in die europäischen Landesgesellschaften.</p>
 
@@ -1175,6 +1246,7 @@ tr.uc-detail.gefiltert{display:none}
         <div class="zitat-label">Aus dem Stellenprofil</div>
         <p>„Gemeinsam mit Fachbereichen und IT integrierst du AI-Lösungen in bestehende Systeme wie CRM-, ERP- und Datenplattformen.“</p>
       </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Die Systemblöcke sind bewusst <b>generisch benannt</b> — die konkrete CWS-Landschaft würde ich gemeinsam mit der IT aufnehmen. Entscheidend sind die Leitplanken darunter: kein LLM-Lock-in, EU-Datenresidenz, Human-in-the-Loop je Workflow und ein klares Betriebsmodell zwischen CoE, IT und Fachbereich.</div>
       <h1 class="view-title">Integration in die Systemlandschaft</h1>
       <p class="view-sub">AI-Lösungen entstehen nicht neben der IT, sondern in ihr: definierte Schnittstellen, klare Verantwortung, kein Schatten-Stack. Systemnamen generisch — die konkrete Landschaft wird gemeinsam mit der IT aufgenommen.</p>
 
@@ -1232,6 +1304,7 @@ tr.uc-detail.gefiltert{display:none}
         <p>„Governance-, Compliance- und Qualitätsstandards für AI etablierst du unter Berücksichtigung regulatorischer Anforderungen (z. B. EU AI Act).“</p>
         <p>„Durch Trainings, Wissenstransfer und Change-Management förderst du AI-Enablement im Unternehmen.“</p>
       </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Links der Pflicht-Teil: <b>AI-Act-Risikoklassen</b> aller 14 Systeme, Entscheidungsgremium, Betriebsvereinbarung, Datenschutz-Folgenabschätzungen. Rechts die Kür: Enablement, gemessen an <b>aktiver Nutzung statt Schulungsquote</b>. Die UC-08-Zeile schließt den Kreis: Governance heißt, auch ein Nein zu dokumentieren.</div>
       <h1 class="view-title">Governance &amp; Enablement</h1>
       <p class="view-sub">Governance ist kein Bremsklotz, sondern die Voraussetzung dafür, dass Use Cases in Produktion gehen dürfen — und Enablement entscheidet, ob sie dort auch genutzt werden.</p>
 
@@ -1358,13 +1431,27 @@ tr.uc-detail.gefiltert{display:none}
     });
   });
 
-  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–5 = Views */
+  /* Lesehilfe (Erklär-Modus): Standard an, Taste E oder Button */
+  var erklaerBtn = document.getElementById("erklaerToggle");
+  function setErklaert(an){
+    document.body.classList.toggle("erklaert", an);
+    erklaerBtn.textContent = an ? "Erklärungen ausblenden" : "Erklärungen einblenden";
+    erklaerBtn.setAttribute("aria-pressed", String(an));
+  }
+  setErklaert(true);
+  erklaerBtn.addEventListener("click", function(){
+    setErklaert(!document.body.classList.contains("erklaert"));
+  });
+
+  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–5 = Views, E = Erklärungen */
   document.addEventListener("keydown", function(e){
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var t = e.target;
     if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
     if (e.key === "p" || e.key === "P") {
       document.body.classList.toggle("presenter");
+    } else if (e.key === "e" || e.key === "E") {
+      setErklaert(!document.body.classList.contains("erklaert"));
     } else if (e.key >= "1" && e.key <= "5") {
       zeigeView("v" + e.key);
     }

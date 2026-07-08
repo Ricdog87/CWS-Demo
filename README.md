@@ -22,6 +22,7 @@ Lokal: `index.html` direkt im Browser öffnen — keine Abhängigkeiten, kein Bu
 |---|---|
 | `1`–`5` | View wechseln |
 | `P` | Präsentationsmodus (Sidebar + Demo-Hinweis aus, Content zentriert) |
+| `E` | Lesehilfe ein-/ausblenden (gelbe Erklär-Boxen, standardmäßig an) |
 | `Strg+P` | Tab 01 als sauberes A4-Querformat drucken/als PDF sichern |
 
 Interaktiv: Tabellenzeilen aufklappen (Klick/Enter), Status-Filter über der
@@ -50,7 +51,10 @@ keine realen CWS-Daten (Hinweisblock im Footer).
 
 `GESPRAECH.md` enthält den Minutenplan für die 7–10-Minuten-Demo im
 Erstgespräch: Route 1 → 2 → 5 → 3 (Tab 4 als Q&A-Reserve), Mic-Drop-Choreografie
-um UC-08, Pre-Flight-Ritual und Fallbacks.
+um UC-08, Pre-Flight-Ritual und Fallbacks. Nach dem Gespräch taugt die URL
+als Leave-Behind: Der Lesehilfe-Modus (Taste `E`, standardmäßig an) erklärt
+jeden View selbst und kennzeichnet die Demo-Daten — der Präsentationsmodus
+(`P`) blendet ihn automatisch aus.
 
 ## Qualitätssicherung
 
@@ -72,3 +76,4 @@ Automatisiert per Playwright vor jedem Deploy:
 | 4 | Corporate Design nachgeschärft: Logo-Lockup Rot+Gelb wie cws.com, Headlines fetter — bewusst ohne runde Buttons (Cockpit ≠ Marketing-Site) |
 | 5 | Alle 7 Aufgaben-Bullets der Anzeige wörtlich zitiert (Strategie-Bullet ergänzt, Tab-05-Zitate wortgetreu) |
 | 6 | Audit-Fixes: Zahlen konsistent (Pipeline 3,1 Mio €, KPI „14/14 klassifiziert" statt „100 % konform"), Business Case mit Invest/Payback (UC-01, UC-03), AI Board + Betriebsvereinbarung (§ 87 BetrVG), Betriebsmodell CoE/IT/Fachbereich, Lenkungskreis Geschäftsführung, AI-Radar, Europa-Skalierung + Zielbild 2028+, Sunset-Kriterium im Betrieb — plus `GESPRAECH.md` (Minutenplan fürs Erstgespräch) |
+| 7 | Lesehilfe-Modus: selbsterklärende gelbe Hinweis-Boxen je View + globaler Demo-Daten-Hinweis (Taste `E`/Sidebar-Button, standardmäßig an, in Presenter-Mode und Druck automatisch aus) · `noindex` + Link-Vorschau-Meta für den Leave-Behind-Versand |

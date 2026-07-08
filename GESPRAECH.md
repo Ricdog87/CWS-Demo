@@ -9,7 +9,8 @@ Merkzettel neben die Tastatur: `1 → 2 → 5 → 3 | 4 = Reserve | P = Presente
    (Font-Cache warm), Tab offen lassen. Zweiten Tab mit derselben Seite als
    Reserve öffnen.
 2. Unmittelbar vor dem Share: **Strg+R** (KPI-Count-up läuft frisch an),
-   dann **Taste P** (Presenter-Mode), dann erst Bildschirm teilen.
+   dann **Taste P** (Presenter-Mode — blendet auch die gelben Lesehilfe-Boxen
+   automatisch aus), dann erst Bildschirm teilen.
 3. Zoom im Browser so, dass die KPI-Leiste und ein ganzer Tab ohne Scrollen
    sichtbar sind (meist 100 % bei 1440p, 110–125 % bei 1080p).
 
@@ -83,5 +84,14 @@ Damit ist der Ehrlichkeits-Rahmen gesetzt, bevor jemand fragt.
 - Vercel nicht erreichbar → lokale `index.html` aus dem Repo im Browser
   öffnen (identischer Stand).
 - Verklickt / falscher Tab → Tasten `1`–`5` statt hektischem Mausklicken.
+
+## Nach dem Gespräch: der Leave-Behind
+
+Den Link **https://ai-cockpit-konzept.vercel.app** per Dankes-Mail an die
+Gesprächspartner schicken. Ohne Presenter-Mode erklärt sich das Dashboard
+selbst: Die gelben **Lesehilfe-Boxen** (standardmäßig eingeblendet) führen
+durch jeden View, kennzeichnen die Demo-Daten und erklären die Logik —
+so wirkt die Demo auch bei Leuten weiter, die nicht im Call waren.
+Die Seite ist per `noindex` von Suchmaschinen ausgenommen.
 
 **Zweimal trocken durchspielen, Stoppuhr auf 8:30.**
