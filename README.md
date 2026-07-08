@@ -46,6 +46,12 @@ ausschließlich im Logo-Lockup (CWS · WORKWEAR wie im Web-Auftritt),
 Archivo/Inter/IBM Plex Mono, kantige Flächen. Alle Kennzahlen und Use Cases sind **illustrative Annahmen**,
 keine realen CWS-Daten (Hinweisblock im Footer).
 
+## Gesprächsvorbereitung
+
+`GESPRAECH.md` enthält den Minutenplan für die 7–10-Minuten-Demo im
+Erstgespräch: Route 1 → 2 → 5 → 3 (Tab 4 als Q&A-Reserve), Mic-Drop-Choreografie
+um UC-08, Pre-Flight-Ritual und Fallbacks.
+
 ## Qualitätssicherung
 
 Automatisiert per Playwright vor jedem Deploy:
@@ -64,3 +70,5 @@ Automatisiert per Playwright vor jedem Deploy:
 | 2 | Features A–F: Presenter-Mode (P), BPM-Prozess-Baselines, Filter-Chips, Tasten 1–5, KPI-Count-up (800 ms, respektiert `prefers-reduced-motion`), Druck-Stylesheet A4 quer |
 | 3 | Feinschliff: Fonts nicht-blockierend, 25px-Touchtargets Matrix, Kontrast-Fix — Lighthouse 100/100/96 |
 | 4 | Corporate Design nachgeschärft: Logo-Lockup Rot+Gelb wie cws.com, Headlines fetter — bewusst ohne runde Buttons (Cockpit ≠ Marketing-Site) |
+| 5 | Alle 7 Aufgaben-Bullets der Anzeige wörtlich zitiert (Strategie-Bullet ergänzt, Tab-05-Zitate wortgetreu) |
+| 6 | Audit-Fixes: Zahlen konsistent (Pipeline 3,1 Mio €, KPI „14/14 klassifiziert" statt „100 % konform"), Business Case mit Invest/Payback (UC-01, UC-03), AI Board + Betriebsvereinbarung (§ 87 BetrVG), Betriebsmodell CoE/IT/Fachbereich, Lenkungskreis Geschäftsführung, AI-Radar, Europa-Skalierung + Zielbild 2028+, Sunset-Kriterium im Betrieb — plus `GESPRAECH.md` (Minutenplan fürs Erstgespräch) |

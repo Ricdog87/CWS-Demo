@@ -614,6 +614,7 @@ body.presenter .main{max-width:1600px;margin:0 auto;width:100%}
   margin-bottom:4px;
 }
 .detail-prozess p.mono{font-family:var(--font-mono);font-size:.72rem;color:var(--ink)}
+.detail-prozess+.detail-prozess{margin-top:8px;padding-top:8px}
 .k-prozess{
   font-family:var(--font-mono);
   font-size:.625rem;
@@ -731,12 +732,12 @@ tr.uc-detail.gefiltert{display:none}
       <div class="kpi-label">Prozessstunden gespart / Monat</div>
     </div>
     <div class="kpi">
-      <div class="kpi-value" data-count="2.4" data-dec="1" data-suffix=" Mio €">2,4 Mio €</div>
-      <div class="kpi-label">Wertbeitrag-Pipeline p. a.</div>
+      <div class="kpi-value" data-count="3.1" data-dec="1" data-suffix=" Mio €">3,1 Mio €</div>
+      <div class="kpi-label">Wertbeitrag-Pipeline p. a. · illustrativ</div>
     </div>
     <div class="kpi">
-      <div class="kpi-value" data-count="100" data-dec="0" data-suffix=" %">100 %</div>
-      <div class="kpi-label">EU-AI-Act-Konformität</div>
+      <div class="kpi-value" data-count="14" data-dec="0" data-suffix="/14">14/14</div>
+      <div class="kpi-label">Systeme AI-Act-klassifiziert</div>
     </div>
   </header>
 
@@ -749,12 +750,12 @@ tr.uc-detail.gefiltert{display:none}
         <p>„AI-Use-Cases identifizierst, bewertest und priorisierst du nach Business-Mehrwert und erwartetem Return on Investment.“</p>
       </div>
       <h1 class="view-title">Strategie &amp; Portfolio</h1>
-      <p class="view-sub">Ein Portfolio statt Einzelprojekte: jeder Use Case mit quantifiziertem Wertbeitrag, AI-Act-Klassifizierung und klarer Priorisierung. Zeile anklicken für Ziel, Ansatz und Stack.</p>
+      <p class="view-sub">Ein Portfolio statt Einzelprojekte: jeder Use Case mit quantifiziertem Wertbeitrag, AI-Act-Klassifizierung und klarer Priorisierung. Zeile anklicken für Ziel, Ansatz und Stack. Das Portfolio deckt bewusst alle drei Hebel ab: Generative AI (UC-03, UC-05), Advanced Analytics (UC-02, UC-04), Prozessautomatisierung (UC-06).</p>
 
       <div class="grid-2">
         <div class="panel">
           <div class="panel-title">Use-Case-Portfolio</div>
-          <div class="panel-sub">Top 7 von 14 nach Wertbeitrag · illustrative Daten</div>
+          <div class="panel-sub">Top 7 von 14 nach Wertbeitrag · Produktion = realisierter Wert, Pilot/Konzeption = validiertes Potenzial · illustrative Daten</div>
           <div class="filter-chips" role="group" aria-label="Portfolio nach Status filtern">
             <button class="fchip active" data-filter="alle">Alle</button>
             <button class="fchip" data-filter="prod">Produktion</button>
@@ -789,6 +790,7 @@ tr.uc-detail.gefiltert{display:none}
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Python · OR-Tools · Telematik-Schnittstelle · Dispositions-Dashboard</p></div>
                   </div>
                   <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø 212 km je Tour → 189 km (−11 %) · Tourenplanung 45 Min/Depot/Tag → 12 Min</p></div>
+                  <div class="detail-prozess"><h4>Business Case</h4><p class="mono">Invest ≈ 90 T€ einmalig · Betrieb ≈ 25 T€ p. a. · Wert/Kosten ≈ 5,9× · Payback ≈ 2 Monate</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="prod" tabindex="0">
@@ -802,7 +804,7 @@ tr.uc-detail.gefiltert{display:none}
                 <td colspan="5">
                   <div class="detail-grid">
                     <div class="detail-block"><h4>Ziel</h4><p>Überbestände und Fehlmengen im Miettextil-Pool reduzieren — weniger gebundenes Kapital, höhere Lieferfähigkeit.</p></div>
-                    <div class="detail-block"><h4>Ansatz</h4><p>Zeitreihenprognose je Artikel und Standort, nächtliches Batch-Scoring, Vorschlagswerte direkt in der Bestandsdisposition. Ausgerollt auf 11 Wäschereien.</p></div>
+                    <div class="detail-block"><h4>Ansatz</h4><p>Zeitreihenprognose je Artikel und Standort, nächtliches Batch-Scoring, Vorschlagswerte direkt in der Bestandsdisposition. Ausgerollt auf 11 Wäschereien — als Rollout-Blaupause für die europäischen Landesgesellschaften angelegt.</p></div>
                     <div class="detail-block"><h4>Stack</h4><p class="mono">Python · Gradient Boosting · Data Warehouse · Dispositions-Integration</p></div>
                   </div>
                   <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Fehlmengenquote 3,1 % → 1,8 % · Sicherheitsbestand −14 %</p></div>
@@ -823,6 +825,7 @@ tr.uc-detail.gefiltert{display:none}
                     <div class="detail-block"><h4>Stack</h4><p class="mono">EU-gehostetes LLM · API-Gateway · Ticketsystem-Integration</p></div>
                   </div>
                   <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">Ø 4,2 Min/Mail → 2,6 Min (−38 %) · Erstantwort 26 h → 9 h</p></div>
+                  <div class="detail-prozess"><h4>Business Case</h4><p class="mono">Invest ≈ 60 T€ einmalig · Betrieb ≈ 40 T€ p. a. (LLM-Nutzung) · Wert/Kosten ≈ 4,1× · Payback ≈ 2 Monate</p></div>
                 </td>
               </tr>
               <tr class="uc-row" data-status="pilot" tabindex="0">
@@ -888,7 +891,7 @@ tr.uc-detail.gefiltert{display:none}
                   <div class="detail-grid">
                     <div class="detail-block"><h4>Entscheidung</h4><p><b>Priorisierung heißt auch Nein sagen.</b> Automatisierte Bewerbungsvorauswahl ist ein Hochrisiko-System nach Anhang III EU AI Act (Beschäftigung).</p></div>
                     <div class="detail-block"><h4>Begründung</h4><p>Konformitätsbewertung, Grundrechte-Folgenabschätzung und laufende Aufsicht stehen in keinem Verhältnis zum erwarteten Nutzen von 120 T€.</p></div>
-                    <div class="detail-block"><h4>Konsequenz</h4><p>Zurückgestellt mit dokumentierter Begründung; Wiedervorlage, sobald harmonisierte Normen die Konformitätskosten deutlich senken.</p></div>
+                    <div class="detail-block"><h4>Konsequenz</h4><p>Vom AI Board zurückgestellt, Begründung dokumentiert; Wiedervorlage, sobald harmonisierte Normen die Konformitätskosten deutlich senken.</p></div>
                   </div>
                   <div class="detail-prozess"><h4>Prozess (BPM)</h4><p class="mono">keine Baseline erhoben — an Gate 2 gestoppt, bevor Prozessaufnahme beauftragt wurde</p></div>
                 </td>
@@ -1062,7 +1065,7 @@ tr.uc-detail.gefiltert{display:none}
               <p class="k-prozess"><b>Prozess:</b> Ø 3,5 Min/Beleg → 0,9 Min</p>
             </div>
           </div>
-          <div class="gate"><b>Betrieb</b>Wöchentliche Qualitätsmetriken · Eskalationspfad · Modell-Reviews</div>
+          <div class="gate"><b>Betrieb</b>Wöchentliche Qualitätsmetriken · Eskalationspfad · Modell-Reviews · Sunset-Kriterium: 2 Quartale ohne Nutzennachweis</div>
         </div>
       </div>
     </section>
@@ -1075,7 +1078,7 @@ tr.uc-detail.gefiltert{display:none}
         <p>„Der Aufbau eines zentralen AI Center of Excellence liegt bei dir – einschließlich der fachlichen und disziplinarischen Führung des neu entstehenden Teams.“</p>
       </div>
       <h1 class="view-title">Roadmap &amp; Teamaufbau</h1>
-      <p class="view-sub">Vier Quartale vom Fundament zur Skalierung — Personal wächst mit der Pipeline, nicht vor ihr.</p>
+      <p class="view-sub">Drei Stoßrichtungen tragen die Strategie: Effizienz im Kerngeschäft, Kundenbindung, datenbasierte Services. Vier Quartale vom Fundament zur Skalierung — Personal wächst mit der Pipeline, nicht vor ihr; ab 2027/28 folgt der Ausbau in die europäischen Landesgesellschaften.</p>
 
       <div class="roadmap">
         <div class="quartal done">
@@ -1083,6 +1086,7 @@ tr.uc-detail.gefiltert{display:none}
           <div class="q-thema">Fundament</div>
           <ul>
             <li>CoE-Setup: Mandat, Priorisierungslogik, Portfolio-Prozess</li>
+            <li>Lenkungskreis mit der Geschäftsführung: Quartals-Review zu Portfolio, Risiken, Wertbeitrag</li>
             <li>AI-Act-Inventar aller Systeme, Governance-Rahmen v1</li>
             <li>Zwei Quick Wins produktiv (UC-03, UC-06)</li>
             <li>Baseline-Messung der Kernprozesse mit den Fachbereichen</li>
@@ -1114,8 +1118,9 @@ tr.uc-detail.gefiltert{display:none}
           <ul>
             <li>Predictive Maintenance Spender: Bewertung → Pilot</li>
             <li>Evaluation agentischer Workflows an zwei Prozessen</li>
-            <li>Übertragbarkeit auf weitere Landesgesellschaften prüfen</li>
+            <li>Skalierung auf europäische Landesgesellschaften: Rollout-Blaupause je Use Case</li>
             <li>Portfolio-Review: Nutzennachweis je Use Case</li>
+            <li>Zielbild 2028+ mit der Geschäftsführung: agentische Prozesse im Regelbetrieb</li>
           </ul>
         </div>
       </div>
@@ -1130,7 +1135,7 @@ tr.uc-detail.gefiltert{display:none}
           <div class="panel-title">Teamaufbau AI- &amp; Business-Process-Management-Einheit</div>
           <div class="panel-sub">Besetzung folgt dem Use-Case-Bedarf</div>
           <div class="rolle">
-            <div class="rolle-name">Teamlead AI<small>Portfolio, Führung, Governance, Stakeholder</small></div>
+            <div class="rolle-name">Teamlead AI<small>Portfolio, Führung, Governance, Stakeholder bis Geschäftsführung</small></div>
             <span class="chip prod">besetzt</span>
           </div>
           <div class="rolle">
@@ -1215,6 +1220,7 @@ tr.uc-detail.gefiltert{display:none}
           <li><b>Provider-Exit-Fähigkeit:</b> LLM-Zugriff über ein Gateway mit austauschbarem Modell-Backend — kein Lock-in auf einen Anbieter.</li>
           <li><b>Human-in-the-Loop je Workflow:</b> für jeden Use Case ist definiert, welche Entscheidung beim Menschen bleibt und wie eingegriffen wird.</li>
           <li><b>Monitoring &amp; Audit-Trail:</b> Modellgüte, Nutzung und Eingriffe werden protokolliert — GoBD-konform, revisionssicher.</li>
+          <li><b>Betriebsmodell mit klarer Ownership:</b> IT betreibt Plattform, Gateway und Schnittstellen · das CoE verantwortet Modelle und Monitoring · der Fachbereich trägt Prozess und Adoption — Übergabe an Gate 4.</li>
         </ul>
       </div>
     </section>
@@ -1259,6 +1265,8 @@ tr.uc-detail.gefiltert{display:none}
             <div class="panel-title">Compliance-Status</div>
             <div class="panel-sub">Laufende Pflichten und Prüfungen</div>
             <ul class="check-liste">
+              <li><span class="check-status">etabliert</span><span><b>AI Board als Entscheidungsgremium</b><small>CIO/CDO, Fachbereichsleitung, Datenschutz — entscheidet an Gate 2 und Gate 4; das CoE bereitet vor, das Board beschließt</small></span></li>
+              <li><span class="check-status">vereinbart</span><span><b>Rahmen-Betriebsvereinbarung AI</b><small>Betriebsrat ab Gate 2 eingebunden; Leistungs- und Verhaltenskontrolle je Use Case ausgeschlossen bzw. geregelt (§ 87 BetrVG)</small></span></li>
               <li><span class="check-status">3/3 ✓</span><span><b>Datenschutz-Folgenabschätzungen (Art. 35 DSGVO)</b><small>für alle Use Cases mit personenbezogenen Daten abgeschlossen</small></span></li>
               <li><span class="check-status">umgesetzt</span><span><b>Transparenzpflichten Art. 50 EU AI Act</b><small>Kennzeichnung AI-generierter Inhalte in UC-03, Vorgabe für UC-05</small></span></li>
               <li><span class="check-status offen">Review Q4</span><span><b>Lieferanten-Assessment LLM-Provider</b><small>Datenresidenz, Auftragsverarbeitung, Exit-Szenario — jährlicher Zyklus</small></span></li>
@@ -1283,9 +1291,10 @@ tr.uc-detail.gefiltert{display:none}
               <div class="fortschritt-balken"><i style="width:100%"></i></div>
             </div>
             <ul class="format-liste">
-              <li><b>Basisschulung AI Literacy:</b> verpflichtend für alle Rollen mit AI-Systemkontakt (Art. 4).</li>
+              <li><b>Basisschulung AI Literacy:</b> verpflichtend für alle Rollen mit AI-Systemkontakt (Art. 4) · Materialien zweisprachig DE/EN, anschlussfähig für die Landesgesellschaften.</li>
               <li><b>Prompt-Workshops an echten CWS-Prozessen</b> — Reklamation, Angebot, Servicebericht — statt generischer Tool-Demos.</li>
               <li><b>Wöchentliche AI-Sprechstunde:</b> offenes Format für Fragen und Use-Case-Ideen aus den Fachbereichen.</li>
+              <li><b>Quartalsweiser AI-Radar für das Management:</b> neue Modelle, Regulatorik, Wettbewerb — bewertet nach CWS-Relevanz mit Empfehlung: verfolgen, pilotieren, ignorieren.</li>
               <li><b>Adoption-Messung:</b> aktive Nutzung je System statt Schulungsquote — was nicht genutzt wird, wird nachgebessert oder abgeschaltet.</li>
             </ul>
           </div>
@@ -1296,7 +1305,7 @@ tr.uc-detail.gefiltert{display:none}
   </div>
 
   <div class="demo-note">
-    <b>Hinweis:</b> Konzept-Prototyp zur Veranschaulichung der Arbeitsweise. Alle Kennzahlen, Use Cases, Termine und Systemzuordnungen sind illustrative Annahmen — keine realen CWS-Daten. Die konkrete Ausgestaltung entsteht im Dialog mit Fachbereichen, IT und Datenschutz.
+    <b>Hinweis:</b> Konzept-Prototyp zur Veranschaulichung der Arbeitsweise. Alle Kennzahlen, Use Cases, Termine und Systemzuordnungen sind illustrative Annahmen — keine realen CWS-Daten. Dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026): So sähe das Cockpit nach dem ersten Halbjahr aus. Die konkrete Ausgestaltung entsteht im Dialog mit Fachbereichen, IT und Datenschutz.
   </div>
 
 </main>
