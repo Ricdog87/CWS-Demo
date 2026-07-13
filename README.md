@@ -34,13 +34,15 @@ Eine einzige HTML-Datei (`index.html`), kein Framework, kein Backend, kein
 localStorage. Einzige externe Ressource: Google Fonts (asynchron geladen,
 Fallback sans-serif — funktioniert offline).
 
-| View | Aufgaben-Bullet aus der Anzeige |
+| View | Bezug zur Anzeige |
 |---|---|
 | 01 Strategie & Portfolio | Use Cases identifizieren, bewerten, nach Business-Mehrwert und ROI priorisieren |
 | 02 AI-Lifecycle | Gesamter Lifecycle von Idee bis produktiver Einsatz (Stage-Gate) |
 | 03 Roadmap & Team | Aufbau des AI Center of Excellence, fachliche + disziplinarische Führung |
 | 04 Integration | AI-Lösungen mit Fachbereichen und IT in CRM/ERP/Datenplattformen integrieren |
 | 05 Governance & Enablement | EU AI Act, Compliance, Qualität; Trainings, Wissenstransfer, Change |
+| 06 Meine ersten 100 Tage | Konkreter Einstieg: Verstehen → Priorisieren → Liefern |
+| 07 Track Record | Anforderungsprofil belegt — drei real gelieferte AI-/Prozess-Projekte |
 
 CWS-CI: Rot `#E2001A` als einzige Akzent-/Funktionsfarbe, CWS-Gelb `#FFD500`
 ausschließlich im Logo-Lockup (CWS · WORKWEAR wie im Web-Auftritt),
@@ -49,9 +51,10 @@ keine realen CWS-Daten (Hinweisblock im Footer).
 
 ## Gesprächsvorbereitung
 
-`GESPRAECH.md` enthält den Minutenplan für die 7–10-Minuten-Demo im
-Erstgespräch: Route 1 → 2 → 5 → 3 (Tab 4 als Q&A-Reserve), Mic-Drop-Choreografie
-um UC-08, Pre-Flight-Ritual und Fallbacks. Nach dem Gespräch taugt die URL
+`GESPRAECH.md` enthält den Minutenplan für die 8–10-Minuten-Demo im
+Erstgespräch: Route 1 → 2 → 5 → 6 → 7 (Tab 3 und 4 als Q&A-Reserve), Bogen
+Können → Auftrag → Urteilskraft → Plan → Beweis, Pre-Flight-Ritual und
+Fallbacks. Nach dem Gespräch taugt die URL
 als Leave-Behind: Der Lesehilfe-Modus (Taste `E`, standardmäßig an) erklärt
 jeden View selbst und kennzeichnet die Demo-Daten — der Präsentationsmodus
 (`P`) blendet ihn automatisch aus.
