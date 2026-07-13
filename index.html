@@ -194,6 +194,7 @@ body{
   margin-bottom:4px;
 }
 .view-sub{color:var(--grau);font-size:.8125rem;margin-bottom:20px;max-width:75em}
+.cockpit-claim{font-family:var(--font-body);font-size:.85rem;color:var(--grau);margin-bottom:18px;max-width:80em}
 
 .panel{
   background:var(--panel);
@@ -234,6 +235,8 @@ body{
 .chip.stop::before{background:var(--dunkelrot)}
 .chip.neutral{color:var(--grau)}
 .chip.neutral::before{background:#C9CBCE}
+.chip.rot{color:var(--rot);border-color:#F2B8BE}
+.chip.rot::before{background:var(--rot)}
 
 /* ---------- Tab 01: Portfolio-Tabelle ---------- */
 .grid-2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -440,6 +443,11 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 }
 .quartal.done{border-top-color:var(--gruen)}
 .quartal.aktuell{border-top-color:var(--rot)}
+.quartal.amber{border-top-color:var(--amber)}
+.quartal.amber li::before{background:var(--amber)}
+.roadmap.dreier{grid-template-columns:repeat(3,1fr)}
+.q-ergebnis{margin-top:10px;padding-top:8px;border-top:1px solid var(--linie);font-size:.7rem;color:var(--ink)}
+.q-ergebnis b{font-family:var(--font-display);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--rot);display:block;margin-bottom:2px}
 .quartal-kopf{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
 .quartal-kopf h3{font-family:var(--font-display);font-size:.9rem;font-weight:700}
 .q-tag{font-family:var(--font-mono);font-size:.65rem;color:var(--grau)}
@@ -590,13 +598,13 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 
 /* ---------- Demo-Hinweis ---------- */
 .demo-note{
-  margin:8px 32px 28px;
-  border:1px dashed #C9CBCE;
-  background:var(--panel);
-  padding:12px 16px;
-  font-size:.7rem;
+  margin:4px 32px 24px;
+  border:none;
+  background:none;
+  padding:0;
+  font-size:.65rem;
   color:var(--grau);
-  line-height:1.6;
+  line-height:1.5;
 }
 .demo-note b{color:var(--ink)}
 
@@ -661,7 +669,6 @@ body.presenter .lesehilfe{display:none!important}
 /* ---------- Feature A: Presenter-Mode ---------- */
 .p-hint{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.625rem;color:var(--grau)}
 body.presenter .sidebar{display:none}
-body.presenter .demo-note{display:none}
 body.presenter .main{max-width:1600px;margin:0 auto;width:100%}
 
 /* ---------- Feature B: Prozess-Baselines (BPM) ---------- */
@@ -722,6 +729,7 @@ tr.uc-detail.gefiltert{display:none}
 @media (max-width:1200px){
   .grid-2,.team-grid,.gov-grid{grid-template-columns:minmax(0,1fr)}
   .roadmap{grid-template-columns:repeat(2,1fr)}
+  .roadmap.dreier{grid-template-columns:minmax(0,1fr)}
   .kanban{grid-template-columns:repeat(3,1fr)}
   .systeme{grid-template-columns:repeat(2,1fr)}
 }
@@ -773,13 +781,14 @@ tr.uc-detail.gefiltert{display:none}
     <button class="nav-item" data-view="v3"><span class="nav-num">03</span>Roadmap &amp; Team</button>
     <button class="nav-item" data-view="v4"><span class="nav-num">04</span>Integration</button>
     <button class="nav-item" data-view="v5"><span class="nav-num">05</span>Governance &amp; Enablement</button>
+    <button class="nav-item" data-view="v6"><span class="nav-num">06</span>Meine ersten 100 Tage</button>
   </nav>
   <div class="sidebar-footer">
     Konzept-Prototyp<br>
     Ricardo Serrano · Juli 2026<br>
     Teamlead AI · JR1013216
     <button class="erklaer-toggle" id="erklaerToggle" aria-pressed="true">Erklärungen ausblenden</button>
-    <span class="p-hint">P = Präsentation · 1–5 = Views · E = Erklärungen</span>
+    <span class="p-hint">P = Präsentation · 1–6 = Views · E = Erklärungen</span>
   </div>
 </aside>
 
@@ -806,9 +815,11 @@ tr.uc-detail.gefiltert{display:none}
 
   <div class="content">
 
+    <p class="cockpit-claim">So würde ich in den ersten 12 Monaten ein AI Center of Excellence bei CWS aufbauen — mit messbarem Wertbeitrag.</p>
+
     <div class="lesehilfe">
       <span class="lesehilfe-label">Lesehilfe · Demo-Daten</span>
-      Dieses Cockpit ist ein <b>Konzept-Prototyp</b> zur Bewerbung als Teamlead AI (Ref. JR1013216): Es zeigt, wie ich ein AI Center of Excellence bei CWS steuern würde. <b>Alle Zahlen sind Demo-Daten</b> — dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026). Der rote Block in jedem View zitiert wörtlich eine Aufgabe aus der Stellenanzeige; der View darunter ist meine Antwort darauf. Navigation: Tasten <b>1–5</b> wechseln die Views, <b>E</b> blendet diese Hinweise aus, <b>P</b> startet den Präsentationsmodus.
+      Dieses Cockpit ist ein <b>Konzept-Prototyp</b> zur Bewerbung als Teamlead AI (Ref. JR1013216): Es zeigt, wie ich ein AI Center of Excellence bei CWS steuern würde. <b>Alle Zahlen sind Demo-Daten</b> — dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026). Der rote Block in jedem View zitiert wörtlich eine Aufgabe aus der Stellenanzeige; der View darunter ist meine Antwort darauf. Navigation: Tasten <b>1–6</b> wechseln die Views, <b>E</b> blendet diese Hinweise aus, <b>P</b> startet den Präsentationsmodus.
     </div>
 
     <!-- ============ TAB 01: STRATEGIE & PORTFOLIO ============ -->
@@ -1376,11 +1387,58 @@ tr.uc-detail.gefiltert{display:none}
       </div>
     </section>
 
+    <!-- ============ TAB 06: MEINE ERSTEN 100 TAGE ============ -->
+    <section id="v6" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Stellenprofil</div>
+        <p>„Der Aufbau eines zentralen AI Center of Excellence liegt bei dir – einschließlich der fachlichen und disziplinarischen Führung des neu entstehenden Teams.“</p>
+      </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Der Fahrplan für den Einstieg: <b>erst verstehen, dann priorisieren, dann liefern</b>. Jede Phase hat ein klares Ergebnis — nach 100 Tagen steht ein produktives Ergebnis, ein freigegebenes Portfolio und die ersten Team-Rollen, keine Strategiefolie ohne Umsetzung.</div>
+      <h1 class="view-title">Meine ersten 100 Tage</h1>
+      <p class="view-sub">Kein Fehlstart mit vorschnellen Tools: Ich beginne mit Zuhören, mache das Portfolio zur gemeinsamen Entscheidung der Fachbereiche und liefere im ersten Quartal ein produktives Ergebnis.</p>
+
+      <div class="roadmap dreier">
+        <div class="quartal done">
+          <div class="quartal-kopf"><h3>Tag 1–30</h3><span class="chip prod">Zuhören vor Bauen</span></div>
+          <div class="q-thema">Verstehen</div>
+          <ul>
+            <li>Stakeholder-Gespräche: alle Fachbereiche, IT, Betriebsrat</li>
+            <li>Bestehende Initiativen &amp; Datenlage aufnehmen (AI Readiness)</li>
+            <li>Systemlandschaft sichten: CRM, ERP, Datenplattform</li>
+          </ul>
+          <div class="q-ergebnis"><b>Ergebnis</b>Realitäts-Landkarte statt Annahmen</div>
+        </div>
+        <div class="quartal amber">
+          <div class="quartal-kopf"><h3>Tag 31–60</h3><span class="chip pilot">Portfolio statt Projekte</span></div>
+          <div class="q-thema">Priorisieren</div>
+          <ul>
+            <li>Use-Case-Inventur gemeinsam mit den Fachbereichen</li>
+            <li>Bewertung nach Wertbeitrag × Machbarkeit, harte Gates</li>
+            <li>Governance-Framework: AI-Act-Klassifizierung ab Tag 1</li>
+          </ul>
+          <div class="q-ergebnis"><b>Ergebnis</b>Priorisiertes Portfolio, vom Management freigegeben</div>
+        </div>
+        <div class="quartal aktuell">
+          <div class="quartal-kopf"><h3>Tag 61–100</h3><span class="chip rot">Ergebnis statt Folien</span></div>
+          <div class="q-thema">Liefern</div>
+          <ul>
+            <li>1–2 Quick Wins in produktiven Betrieb bringen</li>
+            <li>Erste Team-Rollen ausschreiben und besetzen</li>
+            <li>AI-Literacy-Auftakt (Art. 4) für betroffene Bereiche</li>
+          </ul>
+          <div class="q-ergebnis"><b>Ergebnis</b>Messbarer erster Wertbeitrag nach 100 Tagen</div>
+        </div>
+      </div>
+
+      <div class="prinzip">
+        <span class="p-label">Prinzip</span>
+        <p>Nach 100 Tagen gibt es ein produktives Ergebnis, ein priorisiertes Portfolio und die ersten Team-Mitglieder — keine Strategiefolie ohne Umsetzung.</p>
+      </div>
+    </section>
+
   </div>
 
-  <div class="demo-note">
-    <b>Hinweis:</b> Konzept-Prototyp zur Veranschaulichung der Arbeitsweise. Alle Kennzahlen, Use Cases, Termine und Systemzuordnungen sind illustrative Annahmen — keine realen CWS-Daten. Dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026): So sähe das Cockpit nach dem ersten Halbjahr aus. Die konkrete Ausgestaltung entsteht im Dialog mit Fachbereichen, IT und Datenschutz.
-  </div>
+  <div class="demo-note">Konzept-Prototyp mit illustrativen Daten · Ricardo Serrano · Juli 2026 · Teamlead AI JR1013216</div>
 
 </main>
 
@@ -1444,7 +1502,7 @@ tr.uc-detail.gefiltert{display:none}
     setErklaert(!document.body.classList.contains("erklaert"));
   });
 
-  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–5 = Views, E = Erklärungen */
+  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–6 = Views, E = Erklärungen */
   document.addEventListener("keydown", function(e){
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var t = e.target;
@@ -1453,7 +1511,7 @@ tr.uc-detail.gefiltert{display:none}
       document.body.classList.toggle("presenter");
     } else if (e.key === "e" || e.key === "E") {
       setErklaert(!document.body.classList.contains("erklaert"));
-    } else if (e.key >= "1" && e.key <= "5") {
+    } else if (e.key >= "1" && e.key <= "6") {
       zeigeView("v" + e.key);
     }
   });

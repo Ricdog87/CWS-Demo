@@ -20,7 +20,7 @@ Lokal: `index.html` direkt im Browser öffnen — keine Abhängigkeiten, kein Bu
 
 | Taste | Funktion |
 |---|---|
-| `1`–`5` | View wechseln |
+| `1`–`6` | View wechseln |
 | `P` | Präsentationsmodus (Sidebar + Demo-Hinweis aus, Content zentriert) |
 | `E` | Lesehilfe ein-/ausblenden (gelbe Erklär-Boxen, standardmäßig an) |
 | `Strg+P` | Tab 01 als sauberes A4-Querformat drucken/als PDF sichern |
@@ -78,3 +78,4 @@ Automatisiert per Playwright vor jedem Deploy:
 | 6 | Audit-Fixes: Zahlen konsistent (Pipeline 3,1 Mio €, KPI „14/14 klassifiziert" statt „100 % konform"), Business Case mit Invest/Payback (UC-01, UC-03), AI Board + Betriebsvereinbarung (§ 87 BetrVG), Betriebsmodell CoE/IT/Fachbereich, Lenkungskreis Geschäftsführung, AI-Radar, Europa-Skalierung + Zielbild 2028+, Sunset-Kriterium im Betrieb — plus `GESPRAECH.md` (Minutenplan fürs Erstgespräch) |
 | 7 | Lesehilfe-Modus: selbsterklärende gelbe Hinweis-Boxen je View + globaler Demo-Daten-Hinweis (Taste `E`/Sidebar-Button, standardmäßig an, in Presenter-Mode und Druck automatisch aus) · `noindex` + Link-Vorschau-Meta für den Leave-Behind-Versand |
 | 8 | CWS-Perspektive: Nachhaltigkeits-Signale (CO₂ Flotte, Textil-Kreislauf, Energie-Idee) + Business Case der Einheit selbst (Vollausbau ≈ 1,0 Mio € vs. 3,1 Mio € Pipeline — eigene Gate-2-Regel erfüllt) · Q&A-Erweiterung in GESPRAECH.md |
+| 9 | Persistenter Claim unter der KPI-Leiste · Demo-Note zur dezenten Fußzeile verschlankt (Voll-Disclaimer bleibt in der Lesehilfe) · neuer Tab **06 · Meine ersten 100 Tage** (3 Phasen Verstehen/Priorisieren/Liefern, Taste 6) |
