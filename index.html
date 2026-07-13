@@ -448,6 +448,9 @@ tr.uc-detail>td{background:var(--bg);padding:16px 14px;border-bottom:1px solid v
 .roadmap.dreier{grid-template-columns:repeat(3,1fr)}
 .q-ergebnis{margin-top:10px;padding-top:8px;border-top:1px solid var(--linie);font-size:.7rem;color:var(--ink)}
 .q-ergebnis b{font-family:var(--font-display);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--rot);display:block;margin-bottom:2px}
+.tr-block{margin-bottom:9px}
+.tr-block b{font-family:var(--font-display);font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--grau);display:block;margin-bottom:1px}
+.tr-block p{font-size:.72rem;color:var(--ink);line-height:1.45}
 .quartal-kopf{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
 .quartal-kopf h3{font-family:var(--font-display);font-size:.9rem;font-weight:700}
 .q-tag{font-family:var(--font-mono);font-size:.65rem;color:var(--grau)}
@@ -782,13 +785,14 @@ tr.uc-detail.gefiltert{display:none}
     <button class="nav-item" data-view="v4"><span class="nav-num">04</span>Integration</button>
     <button class="nav-item" data-view="v5"><span class="nav-num">05</span>Governance &amp; Enablement</button>
     <button class="nav-item" data-view="v6"><span class="nav-num">06</span>Meine ersten 100 Tage</button>
+    <button class="nav-item" data-view="v7"><span class="nav-num">07</span>Track Record</button>
   </nav>
   <div class="sidebar-footer">
     Konzept-Prototyp<br>
     Ricardo Serrano · Juli 2026<br>
     Teamlead AI · JR1013216
     <button class="erklaer-toggle" id="erklaerToggle" aria-pressed="true">Erklärungen ausblenden</button>
-    <span class="p-hint">P = Präsentation · 1–6 = Views · E = Erklärungen</span>
+    <span class="p-hint">P = Präsentation · 1–7 = Views · E = Erklärungen</span>
   </div>
 </aside>
 
@@ -819,7 +823,7 @@ tr.uc-detail.gefiltert{display:none}
 
     <div class="lesehilfe">
       <span class="lesehilfe-label">Lesehilfe · Demo-Daten</span>
-      Dieses Cockpit ist ein <b>Konzept-Prototyp</b> zur Bewerbung als Teamlead AI (Ref. JR1013216): Es zeigt, wie ich ein AI Center of Excellence bei CWS steuern würde. <b>Alle Zahlen sind Demo-Daten</b> — dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026). Der rote Block in jedem View zitiert wörtlich eine Aufgabe aus der Stellenanzeige; der View darunter ist meine Antwort darauf. Navigation: Tasten <b>1–6</b> wechseln die Views, <b>E</b> blendet diese Hinweise aus, <b>P</b> startet den Präsentationsmodus.
+      Dieses Cockpit ist ein <b>Konzept-Prototyp</b> zur Bewerbung als Teamlead AI (Ref. JR1013216): Es zeigt, wie ich ein AI Center of Excellence bei CWS steuern würde. <b>Alle Zahlen sind Demo-Daten</b> — dargestellt ist ein fiktiver Stand rund sechs Monate nach Start (Q4/2026). Der rote Block in jedem View zitiert wörtlich eine Aufgabe aus der Stellenanzeige; der View darunter ist meine Antwort darauf. Navigation: Tasten <b>1–7</b> wechseln die Views, <b>E</b> blendet diese Hinweise aus, <b>P</b> startet den Präsentationsmodus.
     </div>
 
     <!-- ============ TAB 01: STRATEGIE & PORTFOLIO ============ -->
@@ -1436,6 +1440,46 @@ tr.uc-detail.gefiltert{display:none}
       </div>
     </section>
 
+    <!-- ============ TAB 07: TRACK RECORD ============ -->
+    <section id="v7" class="view">
+      <div class="zitat">
+        <div class="zitat-label">Aus dem Anforderungsprofil</div>
+        <p>„Mehrjährige Erfahrung in Digitalisierungs-, Prozess- oder AI-Projekten.“</p>
+      </div>
+      <div class="lesehilfe"><span class="lesehilfe-label">Lesehilfe</span>Drei real gelieferte Projekte — <b>ohne Kundennamen, ohne Logos</b>. Jede Karte zeigt dasselbe Muster: Problem, was ich gebaut habe, und was davon direkt auf diese Rolle bei CWS einzahlt. Was im Cockpit als Vorgehen steht, habe ich anderswo bereits in Produktion gebracht.</div>
+      <h1 class="view-title">Track Record</h1>
+      <p class="view-sub">Belege statt Behauptungen: drei Projekte, die ich von der Idee bis in den produktiven Betrieb gebracht habe — anonymisiert. Was in diesem Cockpit als Vorgehen beschrieben ist, habe ich bereits umgesetzt.</p>
+
+      <div class="roadmap dreier">
+        <div class="quartal done">
+          <div class="quartal-kopf"><h3>Hiring Radar</h3><span class="chip prod">produktiv</span></div>
+          <div class="q-thema">LLM-Pipeline · Frühwarnung</div>
+          <div class="tr-block"><b>Problem</b><p>Recruiter reagieren auf Stellenanzeigen — und sind damit zu spät am Markt.</p></div>
+          <div class="tr-block"><b>Gebaut</b><p>Frühwarnsystem aus Einstellungsmustern und Marktsignalen, LLM-gestützte Qualifizierung, CRM-Sync. Läuft produktiv und unbeaufsichtigt.</p></div>
+          <div class="q-ergebnis"><b>Relevanz für CWS</b>Blaupause für LLM-Pipelines mit klarer Erfolgs-KPI.</div>
+        </div>
+        <div class="quartal done">
+          <div class="quartal-kopf"><h3>candiq</h3><span class="chip prod">in Produktion</span></div>
+          <div class="q-thema">Governance · DSGVO / AI Act</div>
+          <div class="tr-block"><b>Problem</b><p>50 austauschbare Top-CVs, erzeugt durch Generative AI — Referenzen werden wertlos.</p></div>
+          <div class="tr-block"><b>Gebaut</b><p>DSGVO-konforme Referenz-Verifikation mit DSFA nach Art. 35 und Art.-14-Informationspflichten — in Produktion.</p></div>
+          <div class="q-ergebnis"><b>Relevanz für CWS</b>Die Governance-Praxis aus Tab 05 — real umgesetzt, nicht nur beschrieben.</div>
+        </div>
+        <div class="quartal done">
+          <div class="quartal-kopf"><h3>RSG AI Voice-Suite</h3><span class="chip prod">am Markt</span></div>
+          <div class="q-thema">Strategie bis Go-Live</div>
+          <div class="tr-block"><b>Problem</b><p>Der Mittelstand braucht KI-Telefonie ohne Compliance-Risiko.</p></div>
+          <div class="tr-block"><b>Gebaut</b><p>Architektur, EU-AI-Act-Readiness, Pricing und Markteinführung inklusive Messe-Pitch.</p></div>
+          <div class="q-ergebnis"><b>Relevanz für CWS</b>Von Strategie bis Go-Live aus einer Hand.</div>
+        </div>
+      </div>
+
+      <div class="prinzip">
+        <span class="p-label">Muster</span>
+        <p>Problem erkannt, Lösung gebaut, in Produktion gebracht — nicht Konzept, sondern Auslieferung. Genau dieses Muster bringe ich für CWS mit.</p>
+      </div>
+    </section>
+
   </div>
 
   <div class="demo-note">Konzept-Prototyp mit illustrativen Daten · Ricardo Serrano · Juli 2026 · Teamlead AI JR1013216</div>
@@ -1502,7 +1546,7 @@ tr.uc-detail.gefiltert{display:none}
     setErklaert(!document.body.classList.contains("erklaert"));
   });
 
-  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–6 = Views, E = Erklärungen */
+  /* Feature A + D: Tastatur — P = Presenter-Mode, 1–7 = Views, E = Erklärungen */
   document.addEventListener("keydown", function(e){
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var t = e.target;
@@ -1511,7 +1555,7 @@ tr.uc-detail.gefiltert{display:none}
       document.body.classList.toggle("presenter");
     } else if (e.key === "e" || e.key === "E") {
       setErklaert(!document.body.classList.contains("erklaert"));
-    } else if (e.key >= "1" && e.key <= "6") {
+    } else if (e.key >= "1" && e.key <= "7") {
       zeigeView("v" + e.key);
     }
   });
